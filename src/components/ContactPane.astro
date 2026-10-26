@@ -1,0 +1,71 @@
+---
+import { siteConfig } from '../data/site';
+
+interface Props {
+  id?: string;
+  class?: string;
+  isDarkTheme?: boolean;
+}
+
+const {
+  id = "drawer-content-contact",
+  class: className = "hidden",
+  isDarkTheme = false
+} = Astro.props;
+
+const titleClass = isDarkTheme ? "text-[#f9fafb]" : "text-[var(--color-ink)]";
+const mutedClass = isDarkTheme ? "text-[#b5b3b3]" : "text-[var(--color-muted)]";
+const borderClass = isDarkTheme ? "border-[#4a4747]" : "border-[var(--color-line)]";
+const linkClass = isDarkTheme ? "text-[#f9fafb]" : "text-[var(--color-ink)]";
+---
+
+<div id={id} class:list={["space-y-6", className]}>
+  <h2 class:list={["text-3xl sm:text-4xl font-bold tracking-tight m-0", titleClass]}>
+    Let's work together.
+  </h2>
+  <p class:list={["text-sm leading-relaxed", mutedClass]}>
+    Disponible para oportunidades de desarrollo Full-Stack, pasantías de ingeniería de software y proyectos web a medida.
+  </p>
+
+  <div class:list={["space-y-4 pt-4 border-t text-sm", borderClass]}>
+    <div class="flex flex-col">
+      <span class:list={["text-xs font-mono uppercase", mutedClass]}>Email</span>
+      <a
+        href={`mailto:${siteConfig.email}`}
+        class:list={["text-lg font-semibold no-underline link-sweep w-fit", linkClass]}
+      >
+        {siteConfig.email}
+      </a>
+    </div>
+
+    <div class="flex flex-col">
+      <span class:list={["text-xs font-mono uppercase", mutedClass]}>Perfiles y CV</span>
+      <div class="flex flex-wrap items-center gap-5 mt-1">
+        <a
+          href={siteConfig.links.github}
+          target="_blank"
+          rel="noreferrer"
+          class:list={["no-underline", linkClass]}
+        >
+          <span class="link-relay">GitHub</span>
+        </a>
+        <a
+          href={siteConfig.links.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          class:list={["no-underline", linkClass]}
+        >
+          <span class="link-relay">LinkedIn</span>
+        </a>
+        <a
+          href={siteConfig.links.cv}
+          target="_blank"
+          rel="noreferrer"
+          class:list={["no-underline", linkClass]}
+        >
+          <span class="link-relay">Descargar CV</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

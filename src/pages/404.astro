@@ -85,15 +85,4 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </footer>
   </main>
-
-  <script>
-    document.querySelectorAll('.link-relay').forEach((el) => {
-      const trigger = el.closest('a, button') || el;
-      trigger.addEventListener('pointerenter', () => {
-        el.removeAttribute('data-relay');
-        void (el as HTMLElement).offsetWidth;
-        el.setAttribute('data-relay', '');
-      });
-    });
-  </script>
 </Layout>

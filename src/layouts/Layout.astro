@@ -491,5 +491,30 @@ const {
         }
       }
     </style>
+
+    <script>
+      function initLinkRelays() {
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        document.querySelectorAll('.link-relay').forEach((span) => {
+          const parent = span.parentElement || span;
+          parent.addEventListener('pointerenter', () => {
+            if (!('relay' in span.dataset)) {
+              span.dataset.relay = '';
+            }
+          });
+          span.addEventListener('animationend', (e) => {
+            if (e.animationName === 'relay-enter') {
+              delete span.dataset.relay;
+            }
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLinkRelays);
+      } else {
+        initLinkRelays();
+      }
+    </script>
   </body>
 </html>

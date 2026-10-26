@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import portraitAsset from '../assets/portrait-jfmc.jpg';
+import ContactPane from '../components/ContactPane.astro';
+import { siteConfig } from '../data/site';
 
 const projects = [
   {
@@ -138,7 +140,7 @@ const projects = [
           <button type="button" data-open-drawer="about" class="t-ui pointer-events-auto bg-transparent border-0 p-0 cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
             About
           </button>
-          <a href="/lab" class="t-ui pointer-events-auto no-underline text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
+          <a href={siteConfig.links.lab} class="t-ui pointer-events-auto no-underline text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
             Certificates
           </a>
         </nav>
@@ -196,7 +198,7 @@ const projects = [
 
             <div class="flex flex-col items-end text-right">
               <a
-                href="https://github.com/Nandofernando28"
+                href={siteConfig.links.github}
                 target="_blank"
                 rel="noreferrer"
                 class="t-ui text-[var(--color-ink)] no-underline link-sweep"
@@ -204,7 +206,7 @@ const projects = [
                 <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.08s;">GitHub</span></span>
               </a>
               <a
-                href="https://www.linkedin.com/in/fernando-mor%C3%A1n"
+                href={siteConfig.links.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 class="t-ui text-[var(--color-ink)] no-underline link-sweep"
@@ -553,10 +555,10 @@ const projects = [
             <h2 class="text-2xl sm:text-3xl font-bold tracking-tight m-0">Fernando Morán</h2>
             <p class="text-sm text-[var(--color-muted)] mt-1">Ingeniería en Ciencias de la Computación · UCSG (6to Semestre)</p>
             <div class="flex flex-wrap gap-4 mt-3">
-              <a href="/cv-fernando-moran.pdf" target="_blank" class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] no-underline">
+              <a href={siteConfig.links.cv} target="_blank" rel="noreferrer" class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] no-underline">
                 <span class="link-relay">Descargar CV (PDF) ↗</span>
               </a>
-              <a href="/lab" class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] no-underline">
+              <a href={siteConfig.links.lab} class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] no-underline">
                 <span class="link-relay">Ir a Certificados ↗</span>
               </a>
             </div>
@@ -587,31 +589,8 @@ const projects = [
         </div>
       </div>
 
-      <!-- Contenido Dinámico: Contacto -->
-      <div id="drawer-content-contact" class="space-y-6 hidden">
-        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight m-0">Let's work together.</h2>
-        <p class="text-sm text-[var(--color-muted)] leading-relaxed">
-          Disponible para oportunidades de desarrollo Full-Stack, pasantías de ingeniería de software y proyectos web a medida.
-        </p>
-
-        <div class="space-y-4 pt-4 border-t border-[var(--color-line)] text-sm">
-          <div class="flex flex-col">
-            <span class="text-xs font-mono text-[var(--color-muted)] uppercase">Email</span>
-            <a href="mailto:nandomorancoronel@gmail.com" class="text-lg font-semibold text-[var(--color-ink)] no-underline link-sweep w-fit">
-              nandomorancoronel@gmail.com
-            </a>
-          </div>
-
-          <div class="flex flex-col">
-            <span class="text-xs font-mono text-[var(--color-muted)] uppercase">Perfiles y Credenciales</span>
-            <div class="flex flex-wrap items-center gap-5 mt-1">
-              <a href="https://github.com/Nandofernando28" target="_blank" class="text-[var(--color-ink)] no-underline"><span class="link-relay">GitHub</span></a>
-              <a href="https://www.linkedin.com/in/fernando-mor%C3%A1n" target="_blank" class="text-[var(--color-ink)] no-underline"><span class="link-relay">LinkedIn</span></a>
-              <a href="/cv-fernando-moran.pdf" target="_blank" class="text-[var(--color-ink)] no-underline"><span class="link-relay">Descargar CV</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Contenido Dinámico: Contacto (Componente Reutilizable) -->
+      <ContactPane id="drawer-content-contact" class="hidden" />
     </div>
 
     <!-- Pie del Drawer -->
@@ -633,27 +612,6 @@ const projects = [
       const yr = String(now.getFullYear()).slice(-2);
       dateEl.textContent = `${month} ‘${yr}`;
     }
-
-    // =========================================================================
-    // 2. LINK RELAY INTERACTION (mod_75669: relay-leave + relay-enter)
-    // =========================================================================
-    function initLinkRelays() {
-      if (!window.matchMedia('(hover: hover)').matches) return;
-      document.querySelectorAll('.link-relay').forEach((span) => {
-        const parent = span.parentElement || span;
-        parent.addEventListener('pointerenter', () => {
-          if (!('relay' in span.dataset)) {
-            span.dataset.relay = '';
-          }
-        });
-        span.addEventListener('animationend', (e) => {
-          if (e.animationName === 'relay-enter') {
-            delete span.dataset.relay;
-          }
-        });
-      });
-    }
-    initLinkRelays();
 
     // =========================================================================
     // 3. FUNCIONES DE FÍSICA COMPARTIDAS (mod_11715 & mod_12674)

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ContactPane from "../components/ContactPane.astro";
 
 const labCertificates = [
   {
@@ -168,6 +169,7 @@ const cluster = { w: 2800, h: 1420 };
     <!-- 1. LIENZO INFINITO WEBGL + HIT LAYER + HOVER PILL -->
     <div
       id="lab-field-root"
+      style="background-color: #c4452f;"
       class="absolute inset-0 cursor-grab touch-none select-none"
     >
       <canvas id="lab-webgl-canvas" class="absolute inset-0 block w-full h-full"
@@ -327,58 +329,8 @@ const cluster = { w: 2800, h: 1420 };
           </div>
         </div>
 
-        <!-- PANEL B: Contacto (Idéntico al de index.astro para mantener consistencia total) -->
-        <div id="lab-pane-contact" class="space-y-6 hidden">
-          <h2
-            class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f9fafb] m-0"
-          >
-            Let's work together.
-          </h2>
-          <p class="text-sm text-[#b5b3b3] leading-relaxed">
-            Disponible para oportunidades de desarrollo Full-Stack, pasantías de
-            ingeniería de software y proyectos web a medida.
-          </p>
-
-          <div class="space-y-4 pt-4 border-t border-[#4a4747] text-sm">
-            <div class="flex flex-col">
-              <span class="text-xs font-mono text-[#b5b3b3] uppercase"
-                >Email</span
-              >
-              <a
-                href="mailto:nandomorancoronel@gmail.com"
-                class="text-lg font-semibold text-[#f9fafb] no-underline link-sweep w-fit"
-              >
-                nandomorancoronel@gmail.com
-              </a>
-            </div>
-
-            <div class="flex flex-col">
-              <span class="text-xs font-mono text-[#b5b3b3] uppercase"
-                >Perfiles y CV</span
-              >
-              <div class="flex flex-wrap items-center gap-5 mt-1">
-                <a
-                  href="https://github.com/Nandofernando28"
-                  target="_blank"
-                  class="text-[#f9fafb] no-underline"
-                  ><span class="link-relay">GitHub</span></a
-                >
-                <a
-                  href="https://www.linkedin.com/in/fernando-mor%C3%A1n"
-                  target="_blank"
-                  class="text-[#f9fafb] no-underline"
-                  ><span class="link-relay">LinkedIn</span></a
-                >
-                <a
-                  href="/cv-fernando-moran.pdf"
-                  target="_blank"
-                  class="text-[#f9fafb] no-underline"
-                  ><span class="link-relay">Descargar CV</span></a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- PANEL B: Contacto (Componente Reutilizable idéntico a index.astro) -->
+        <ContactPane id="lab-pane-contact" class="hidden" isDarkTheme />
       </div>
 
       <!-- Pie del Side-Drawer (idéntico a index.astro) -->
@@ -512,19 +464,6 @@ const cluster = { w: 2800, h: 1420 };
        MOTOR WEBGL DEL LIENZO INFINITO + SHADERS GLSL EXACTOS (mod_78896)
        ===================================================== -->
   <script define:vars={{ labCertificates, cluster }}>
-    // 1. Inicializar LinkRelays
-    if (window.matchMedia("(hover: hover)").matches) {
-      document.querySelectorAll(".link-relay").forEach((span) => {
-        const parent = span.parentElement || span;
-        parent.addEventListener("pointerenter", () => {
-          if (!("relay" in span.dataset)) span.dataset.relay = "";
-        });
-        span.addEventListener("animationend", (e) => {
-          if (e.animationName === "relay-enter") delete span.dataset.relay;
-        });
-      });
-    }
-
     // 2. Utilidades matemáticas exactas (mod_11715, mod_12674, mod_78896)
     const modWrap = (val, size) =>
       size <= 0 ? 0 : ((val % size) + size) % size;
