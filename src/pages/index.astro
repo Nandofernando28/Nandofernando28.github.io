@@ -1,0 +1,2206 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import portraitAsset from '../assets/portrait-jfmc.jpg';
+
+const projects = [
+  {
+    slug: "veritask",
+    title: "VeriTask.Cloud",
+    client: "VeriTask.cloud",
+    role: "Full-Stack Developer",
+    year: "2026",
+    color: "#fabb33",
+    badge: "SERVERLESS // CLOUDFLARE",
+    summary: "Sistema web full-stack para gestión interna con arquitectura serverless sobre Cloudflare Workers, D1 y R2.",
+    details: [
+      "Arquitectura serverless con React + Vite en frontend y Hono sobre Cloudflare Workers en backend.",
+      "Persistencia distribuida en la nube utilizando Cloudflare D1 (SQLite en el edge) y almacenamiento R2.",
+      "Autenticación segura basada en JWT con manejo de sesiones y validaciones estrictas de formularios.",
+      "Operaciones CRUD completas con validación de esquemas en cliente y servidor."
+    ],
+    stack: ["React", "Vite", "Hono", "Serverless", "Cloudflare Workers", "Cloudflare D1 & R2", "JWT"],
+    liveUrl: "https://veritask.cloud"
+  },
+  {
+    slug: "portal-academico",
+    title: "Portal Institucional",
+    client: "Institución Educativa",
+    role: "Frontend & CMS Developer",
+    year: "2025",
+    color: "#C4452F",
+    badge: "PRODUCTION // WEB PORTAL",
+    summary: "Desarrollo y personalización de portal académico en entorno productivo con gestión dinámica de noticias.",
+    details: [
+      "Implementación de sistema de diseño personalizado mediante CSS modular en producción.",
+      "Desarrollo de shortcodes a medida y configuración avanzada de bloques dinámicos.",
+      "Optimización de la arquitectura de información para comunicados y noticias institucionales."
+    ],
+    stack: ["WordPress", "Custom CSS", "Elementor", "PHP Shortcodes", "UI Design"],
+    liveUrl: "/lab"
+  },
+  {
+    slug: "aws-genai",
+    title: "AWS & GenAI Architecture",
+    client: "AWS Training & Labs",
+    role: "Cloud & AI Practitioner",
+    year: "2026",
+    color: "#3A52A8",
+    badge: "CLOUD // GENERATIVE AI",
+    summary: "Infraestructura en la nube, ingeniería de prompts y aplicaciones impulsadas por Inteligencia Artificial Generativa en AWS.",
+    details: [
+      "AWS Cloud Practitioner Essentials & Generación de Infraestructura con IA Generativa.",
+      "Workshop: Construcción de aplicaciones con IA Generativa en Amazon Web Services.",
+      "AWS Essentials of Prompt Engineering & Introduction to Responsible AI."
+    ],
+    stack: ["AWS Cloud", "Generative AI", "Prompt Engineering", "Cloud Architecture"],
+    liveUrl: "/lab"
+  },
+  {
+    slug: "networking-security",
+    title: "Cisco Net & CyberSec",
+    client: "Cisco Networking Academy",
+    role: "Network & Security Spec.",
+    year: "2025—2026",
+    color: "#1F8A93",
+    badge: "INFRASTRUCTURE // SECURITY",
+    summary: "Simulación de topologías de red, protocolos de enrutamiento y fundamentos de ciberseguridad defensiva.",
+    details: [
+      "Exploring Networking with Cisco Packet Tracer & Configuración de topologías LAN/WAN.",
+      "Introducción a la Ciberseguridad: protección de activos, análisis de vulnerabilidades y entornos Linux (Fedora, Ubuntu, Kali).",
+      "Integración de hardware/software con C++ y Arduino IDE."
+    ],
+    stack: ["Cisco Packet Tracer", "Cybersecurity", "Linux (Fedora/Kali)", "C++"],
+    liveUrl: "/lab"
+  }
+];
+---
+
+<Layout title="Creative Engineer & Full-Stack Developer | Fernando Morán">
+  <!-- SVG Filters: Retrato ChannelSplit + Filtros de Aberración Cromática por Velocidad/Cursor para el GalleryCanvas -->
+  <svg aria-hidden="true" width="0" height="0" class="absolute pointer-events-none">
+    <filter id="channel-split-portrait" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feOffset id="fe-red-offset" in="SourceGraphic" dx="0" dy="0" result="redShift" />
+      <feColorMatrix in="redShift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green" />
+      <feOffset id="fe-blue-offset" in="SourceGraphic" dx="0" dy="0" result="blueShift" />
+      <feColorMatrix in="blueShift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
+      <feBlend in="red" in2="green" mode="screen" result="redGreen" />
+      <feBlend in="redGreen" in2="blue" mode="screen" />
+    </filter>
+
+    {Array.from({ length: 10 }).map((_, idx) => (
+      <filter id={`card-split-${idx}`} x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+        <feOffset id={`card-red-${idx}`} in="SourceGraphic" dx="0" dy="0" result="redShift" />
+        <feColorMatrix in="redShift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
+        <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green" />
+        <feOffset id={`card-blue-${idx}`} in="SourceGraphic" dx="0" dy="0" result="blueShift" />
+        <feColorMatrix in="blueShift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
+        <feBlend in="red" in2="green" mode="screen" result="redGreen" />
+        <feBlend in="redGreen" in2="blue" mode="screen" />
+      </filter>
+    ))}
+  </svg>
+
+  <!-- CONTENEDOR MAESTRO FULL-VIEWPORT (Estructura exacta de juanmoraromero.com) -->
+  <main class="flex lg:h-svh lg:min-h-[660px] flex-col overflow-x-hidden bg-[var(--color-bg)] select-none">
+    
+    <!-- =====================================================
+         BANDA 0: BARRA DE NAVEGACIÓN SUPERIOR (SiteMenuBar)
+         ===================================================== -->
+    <div data-home-line="nav" class="border-b border-[var(--color-line)] shrink-0">
+      <div class="container-jmr ds-grid items-center py-vw-16">
+        <!-- Logo Col 1-3 (Isotipo N. de logo-kit/svg/mark-transparent-dark-bg.svg) -->
+        <a
+          href="/"
+          aria-label="N. — Fernando Morán"
+          class="pointer-events-auto no-underline col-start-1 col-end-2 sm:col-end-4 inline-flex items-center w-fit text-[var(--color-ink)]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="12.5 16 41.25 36.25"
+            class="h-5 sm:h-[22px] w-auto block"
+            aria-hidden="true"
+          >
+            <polygon
+              points="12.5,16 21.5,16 34.5,38.32 34.5,16 41.5,16 41.5,52 32.5,52 19.5,29.68 19.5,52 12.5,52"
+              fill="#f9fafb"
+            />
+            <circle cx="49" cy="47.5" r="4.75" fill="#C4452F" />
+          </svg>
+        </a>
+
+        <!-- Nav Col 4-10 -->
+        <nav class="col-start-2 col-end-4 sm:col-[4/10] nav-main-cell flex items-center gap-vw-15 justify-center sm:justify-start">
+          <button type="button" data-open-drawer="close" class="t-ui pointer-events-auto bg-transparent border-0 p-0 cursor-pointer text-[var(--color-ink)] link-sweep">
+            Work
+          </button>
+          <button type="button" data-open-drawer="about" class="t-ui pointer-events-auto bg-transparent border-0 p-0 cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
+            About
+          </button>
+          <a href="/lab" class="t-ui pointer-events-auto no-underline text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
+            Certificates
+          </a>
+        </nav>
+
+        <!-- Contact Col 12 -->
+        <div class="col-start-4 sm:col-[12/13] justify-self-end whitespace-nowrap">
+          <button type="button" data-open-drawer="contact" class="t-ui pointer-events-auto p-0 border-0 bg-transparent text-[var(--color-ink)] cursor-pointer">
+            <span class="link-relay">Contact</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         BANDA 1: SECCIÓN SUPERIOR (RailTop + Statement)
+         ===================================================== -->
+    <section data-home-line="divider" class="flex min-h-0 lg:[flex:1.05_1_0] border-b border-[var(--color-line)]">
+      <div class="container-jmr ds-grid h-full flex-1 grid-rows-[minmax(0,1fr)]">
+        
+        <!-- COLUMNA IZQUIERDA SUPERIOR (RailTop: Cols 1-3) -->
+        <div class="col-span-full lg:col-start-1 lg:col-end-4 rail-cell flex h-full flex-col justify-between gap-8 lg:gap-0 border-b lg:border-b-0 border-[var(--color-line)]">
+          <!-- Fila superior: Foto JFMC.JPG con ChannelSplit + Punto circular con scale reveal -->
+          <div class="flex items-start justify-between">
+            <div
+              id="portrait-wrapper"
+              class="relative aspect-square w-vw-184 max-w-full overflow-hidden bg-[#262424] cursor-crosshair"
+            >
+              <Image
+                id="portrait-img"
+                src={portraitAsset}
+                alt="Retrato de Fernando Morán"
+                width={368}
+                height={368}
+                loading="eager"
+                decoding="async"
+                class="h-full w-full object-cover grayscale contrast-110 block will-change-[filter]"
+                draggable="false"
+              />
+            </div>
+
+            <!-- Punto circular sólido de identidad (exacto a L() en mod_57092) -->
+            <span class="h-vw-14 w-vw-14 shrink-0 rounded-full bg-[var(--color-ink)] block reveal-dot"></span>
+          </div>
+
+          <!-- Fila inferior: Services + Redes Sociales con HomeRevealBlock escalonado -->
+          <div class="flex items-end justify-between gap-vw-8">
+            <div class="flex flex-col">
+              <span class="t-ui text-[var(--color-muted)]">
+                <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.00s;">Services:</span></span>
+              </span>
+              <span class="t-ui text-[var(--color-ink)]">
+                <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.04s;">Full-Stack, Cloud & AI</span></span>
+              </span>
+            </div>
+
+            <div class="flex flex-col items-end text-right">
+              <a
+                href="https://github.com/Nandofernando28"
+                target="_blank"
+                rel="noreferrer"
+                class="t-ui text-[var(--color-ink)] no-underline link-sweep"
+              >
+                <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.08s;">GitHub</span></span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/fernando-mor%C3%A1n"
+                target="_blank"
+                rel="noreferrer"
+                class="t-ui text-[var(--color-ink)] no-underline link-sweep"
+              >
+                <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.12s;">LinkedIn</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA SUPERIOR (Statement: Cols 4-13) -->
+        <div
+          data-home-line="column"
+          class="col-span-full lg:col-start-4 lg:col-end-13 main-cell flex h-full flex-col justify-between gap-10 lg:gap-0"
+        >
+          <div id="statement-stage" class="relative">
+            <!-- Flecha en esquina superior izquierda con HomeRevealBlock -->
+            <span class="t-ui absolute top-0 left-0 mt-vw-2 leading-[1.4] text-[var(--color-ink)] z-10 pointer-events-none">
+              <span class="home-reveal-mask">
+                <span class="home-reveal-inner" style="--reveal-delay: 0.16s;">
+                  <svg class="block h-vw-14 w-vw-14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M12 8.66667H1V0M7.83784 4.64286L12 8.66667L7.83784 13" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </span>
+              </span>
+            </span>
+
+            <!-- Statement Tipográfico Indented con Custom-Shaped Cursor Trail Shader (BertovDev/cursor-shader-trail) -->
+            <h1
+              id="statement-heading"
+              class="t-statement text-[var(--color-ink)] m-0 relative"
+              style="text-indent: calc(var(--col) + var(--gutter));"
+            >
+              <span class="home-reveal-mask">
+                <span id="statement-text-inner" class="home-reveal-inner" style="--reveal-delay: 0.10s;">
+                  Fernando Morán is a full-stack developer in training. I built Veritask, a web platform that helps heavy-machinery fleets track maintenance, fuel and inventory, and I'm looking for an internship to keep building.
+                </span>
+              </span>
+            </h1>
+            <canvas
+              id="statement-trail-canvas"
+              aria-hidden="true"
+              class="absolute pointer-events-none z-[5]"
+            ></canvas>
+          </div>
+
+          <!-- Pie del Statement: Available for work + Fecha + Scroll con HomeRevealBlock -->
+          <div class="flex items-end justify-between gap-vw-8">
+            <div class="flex flex-col">
+              <span class="t-ui text-[var(--color-muted)]">
+                <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.20s;">Available for work</span></span>
+              </span>
+              <span class="t-ui text-[var(--color-ink)]">
+                <span class="home-reveal-mask"><span id="availability-date" class="home-reveal-inner" style="--reveal-delay: 0.24s;">October ‘26</span></span>
+              </span>
+            </div>
+
+            <span class="t-ui text-[var(--color-muted)]">
+              <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.28s;">Scroll / Drag →</span></span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BANDA 2: SECCIÓN INFERIOR (RailBottom + GalleryCanvas)
+         ===================================================== -->
+    <section class="flex min-h-[360px] lg:min-h-0 lg:[flex:0.95_1_0]">
+      <div class="container-jmr ds-grid h-full flex-1 grid-rows-[minmax(0,1fr)]">
+        
+        <!-- COLUMNA IZQUIERDA INFERIOR (RailBottom: Cols 1-3) -->
+        <div class="col-span-full lg:col-start-1 lg:col-end-4 rail-cell flex h-full flex-col justify-between gap-8 lg:gap-0 border-b lg:border-b-0 border-[var(--color-line)]">
+          <!-- Metadatos Dinámicos del Proyecto Activo: Client, Role, View Detail -->
+          <div class="flex items-start justify-between gap-vw-8">
+            <div class="flex flex-col gap-vw-12">
+              <div class="flex flex-col">
+                <span class="t-ui text-[var(--color-muted)]">
+                  <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.48s;">Client:</span></span>
+                </span>
+                <span class="t-ui text-[var(--color-ink)]">
+                  <span class="home-reveal-mask"><span id="active-client" class="home-reveal-inner" style="--reveal-delay: 0.52s;">{projects[0].client}</span></span>
+                </span>
+              </div>
+
+              <div class="flex flex-col">
+                <span class="t-ui text-[var(--color-muted)]">
+                  <span class="home-reveal-mask"><span class="home-reveal-inner" style="--reveal-delay: 0.56s;">Role:</span></span>
+                </span>
+                <span class="t-ui text-[var(--color-ink)]">
+                  <span class="home-reveal-mask"><span id="active-role" class="home-reveal-inner" style="--reveal-delay: 0.60s;">{projects[0].role}</span></span>
+                </span>
+              </div>
+            </div>
+
+            <button
+              id="btn-view-detail"
+              type="button"
+              class="t-ui text-[var(--color-ink)] bg-transparent border-0 p-0 cursor-pointer whitespace-nowrap"
+            >
+              <span class="home-reveal-mask">
+                <span class="home-reveal-inner" style="--reveal-delay: 0.64s;">
+                  <span class="link-relay">View Detail</span>
+                </span>
+              </span>
+            </button>
+          </div>
+
+          <!-- Cuadrícula: Animación ASCII de la Evolución Humana -->
+          <div
+            id="ascii-terminal-window"
+            class="emerge-shape relative w-full border border-[var(--color-line)] bg-transparent font-mono select-none"
+            style="--reveal-delay: 0.48s;"
+          >
+            <!-- Cabecera de la cuadrícula -->
+            <div class="flex items-center justify-between px-3 py-2 border-b border-[var(--color-line)] text-xs font-mono uppercase tracking-widest text-[var(--color-muted)]">
+              <span class="text-[var(--color-ink)] font-semibold">Coder's Evolution</span>
+              <div class="flex items-center gap-3">
+                <button
+                  id="ascii-mode-btn"
+                  type="button"
+                  class="t-ui p-0 bg-transparent border-0 cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors text-xs font-mono uppercase tracking-wider link-sweep"
+                  title="Cambiar modo: Desfile (Parade) / Caminante Individual (Morph)"
+                >
+                  PARADE ⇄
+                </button>
+                <button
+                  id="ascii-speed-btn"
+                  type="button"
+                  class="t-ui p-0 bg-transparent border-0 cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors text-xs font-mono uppercase tracking-wider link-sweep"
+                  title="Ajustar velocidad"
+                >
+                  0.5X
+                </button>
+              </div>
+            </div>
+
+            <!-- Pantalla ASCII integrada directamente en la cuadrícula -->
+            <div class="p-3 overflow-x-auto overflow-y-hidden">
+              <pre
+                id="ascii-screen"
+                class="font-mono text-[9.5px] sm:text-[10.5px] leading-[1.12] text-[var(--color-ink)] m-0 whitespace-pre pointer-events-none"
+                aria-label="Animación ASCII de la evolución del ser humano caminando hacia la derecha"
+              ></pre>
+            </div>
+
+            <!-- Pie de la cuadrícula -->
+            <div class="flex items-center justify-between px-3 py-1.5 border-t border-[var(--color-line)] text-[10px] font-mono text-[var(--color-muted)]">
+              <span id="ascii-epoch" class="truncate font-mono text-[var(--color-muted)]">
+                3.8M BCE → 2026 CE // MARCH OF PROGRESS
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA INFERIOR (GalleryCanvas con Física Continua Hermite + HoverPill + RGB Split) -->
+        <div class="relative col-span-full lg:col-start-4 lg:col-end-13 main-cell flex h-full min-h-[300px] lg:min-h-0 flex-col lg:-mr-[var(--marge-x)] overflow-hidden">
+          <!-- Contador Superior Derecho (01/05) -->
+          <span class="t-ui absolute top-vw-16 right-[var(--marge-x)] text-[var(--color-ink)] z-20 pointer-events-none">
+            <span class="home-reveal-mask">
+              <span id="gallery-counter" class="home-reveal-inner" style="--reveal-delay: 0.68s;">
+                01/0{projects.length}
+              </span>
+            </span>
+          </span>
+
+          <!-- Escenario de Galería con Física Continua (mod_96767 + mod_11715) -->
+          <div
+            id="gallery-bounds"
+            class="relative flex-1 min-h-0 w-full overflow-hidden select-none cursor-grab"
+          >
+            <!-- Sonda oculta para medir --gutter en px exactos (idéntica a mod_96767) -->
+            <div id="gutter-probe" style="width: var(--gutter); height: 0; position: absolute; visibility: hidden;"></div>
+
+            <!-- Planos del carrusel (2 ciclos completos para loop infinito continuo sin costuras) -->
+            <div id="gallery-planes-layer" class="absolute inset-0">
+              {Array.from({ length: projects.length * 2 }).map((_, slotIdx) => {
+                const proj = projects[slotIdx % projects.length];
+                const projIdx = slotIdx % projects.length;
+                return (
+                  <article
+                    data-plane={slotIdx}
+                    data-project-index={projIdx}
+                    style={`background-color: ${proj.color};`}
+                    class="gallery-plane absolute top-0 left-0 origin-top-left will-change-transform overflow-hidden flex flex-col justify-between p-5 sm:p-6 cursor-pointer"
+                  >
+                    <!-- Cabecera interna de la tarjeta -->
+                    <div class="flex items-center justify-between text-[#f9fafb]/80 font-mono text-[11px] tracking-wider uppercase z-10 pointer-events-none">
+                      <span class="truncate pr-2">{proj.badge}</span>
+                      <span class="shrink-0">{proj.year}</span>
+                    </div>
+
+                    <!-- Visual / Mockup Arquitectónico Central -->
+                    <div class="my-auto py-1 z-10 pointer-events-none">
+                      <div class="text-[#f9fafb]/45 font-mono text-xs mb-1">0{projIdx + 1}</div>
+                      <h2 class="text-[#f9fafb] font-bold text-lg sm:text-2xl lg:text-[26px] tracking-tight leading-tight m-0">
+                        {proj.title}
+                      </h2>
+                      <p class="card-summary text-[#f9fafb]/85 text-xs sm:text-sm mt-2 line-clamp-2 max-w-[28ch] leading-snug">
+                        {proj.summary}
+                      </p>
+                    </div>
+
+                    <!-- Pie de la tarjeta: Stack pills -->
+                    <div class="flex items-center justify-between gap-2 pt-2.5 border-t border-white/20 z-10 pointer-events-none">
+                      <div class="flex flex-wrap gap-1.5">
+                        {proj.stack.slice(0, 3).map((tech) => (
+                          <span class="px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-black/20 text-[#f9fafb] rounded-sm">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <span class="text-[11px] font-mono uppercase tracking-wider text-[#f9fafb]/90">
+                        ↗
+                      </span>
+                    </div>
+
+                    <!-- Decoración geométrica sutil de fondo -->
+                    <div class="absolute -right-8 -bottom-8 w-36 h-36 rounded-full border border-white/12 pointer-events-none"></div>
+                  </article>
+                );
+              })}
+            </div>
+
+            <!-- HoverPill Oficial de j.mr (mod_22736: máscara recortada al plano activo + mix-blend-difference + marquee) -->
+            <div
+              id="hover-pill-mask"
+              aria-hidden="true"
+              class="absolute top-0 left-0 overflow-hidden mix-blend-difference pointer-events-none select-none will-change-transform z-30"
+              style="width: 0px; height: 0px;"
+            >
+              <div
+                id="hover-pill-box"
+                class="absolute top-0 left-0 w-vw-122 h-vw-34 rounded-vw-17 overflow-hidden flex items-center text-[#000000] will-change-transform"
+              >
+                <div
+                  id="hover-pill-bg"
+                  class="absolute inset-0 rounded-[inherit] bg-[#ffffff]"
+                  style="transform: scale(0); transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);"
+                ></div>
+                <div
+                  id="hover-pill-marquee"
+                  class="t-ui hover-pill-marquee relative flex shrink-0 min-w-max whitespace-nowrap z-10"
+                  style="opacity: 0; transition: opacity 220ms ease;"
+                >
+                  {Array.from({ length: 4 }).map(() => (
+                    <span class="flex items-center">
+                      <span class="px-2.5">View Project</span>
+                      <span class="inline-block w-1.5 h-1.5 rounded-full bg-current opacity-35"></span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       DRAWER LATERAL MULTIPROPÓSITO (Project / About / Contact)
+       ===================================================== -->
+  <div
+    id="drawer-backdrop"
+    class="fixed inset-0 z-40 bg-black/50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-500"
+  ></div>
+
+  <aside
+    id="side-drawer"
+    class="fixed top-0 right-0 z-50 h-svh w-full max-w-xl bg-[#282626] text-[var(--color-ink)] border-l border-[var(--color-line)] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.625,0.05,0,1)] flex flex-col justify-between overflow-y-auto p-6 sm:p-10"
+    aria-hidden="true"
+  >
+    <!-- Cabecera del Drawer -->
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-[var(--color-line)] mb-8">
+        <span id="drawer-eyebrow" class="font-mono text-xs uppercase tracking-widest text-[var(--color-muted)]">
+          DETAIL // VIEW
+        </span>
+        <button
+          id="close-drawer-btn"
+          type="button"
+          class="t-ui text-[var(--color-ink)] bg-transparent border-0 cursor-pointer p-0"
+        >
+          <span class="link-relay">Close [ESC]</span>
+        </button>
+      </div>
+
+      <!-- Contenido Dinámico: Proyecto -->
+      <div id="drawer-content-project" class="space-y-6 hidden">
+        <div class="flex items-center gap-3">
+          <span id="drawer-proj-dot" class="w-3 h-3 rounded-full inline-block"></span>
+          <span id="drawer-proj-year" class="font-mono text-xs text-[var(--color-muted)]"></span>
+        </div>
+        <h2 id="drawer-proj-title" class="text-3xl sm:text-4xl font-bold tracking-tight m-0"></h2>
+        <p id="drawer-proj-summary" class="text-base text-[var(--color-ink)]/90 leading-relaxed"></p>
+
+        <div class="grid grid-cols-2 gap-4 py-4 border-y border-[var(--color-line)] text-sm">
+          <div>
+            <span class="block text-[var(--color-muted)] text-xs mb-1">Client</span>
+            <span id="drawer-proj-client" class="font-semibold"></span>
+          </div>
+          <div>
+            <span class="block text-[var(--color-muted)] text-xs mb-1">Role</span>
+            <span id="drawer-proj-role" class="font-semibold"></span>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-mono uppercase tracking-wider text-[var(--color-muted)] mb-3">Key Contributions & Architecture</h3>
+          <ul id="drawer-proj-list" class="space-y-2.5 text-sm leading-relaxed pl-4 list-disc text-[var(--color-ink)]/85"></ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-mono uppercase tracking-wider text-[var(--color-muted)] mb-3">Tech Stack</h3>
+          <div id="drawer-proj-stack" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="pt-4">
+          <a
+            id="drawer-proj-link"
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            class="t-ui inline-flex items-center gap-2 text-[var(--color-ink)] no-underline"
+          >
+            <span class="w-2.5 h-2.5 rounded-full bg-current inline-block"></span>
+            <span id="drawer-proj-link-text" class="link-relay">Visitar landing page ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contenido Dinámico: About Me (Con Foto JFMC.JPG y CV) -->
+      <div id="drawer-content-about" class="space-y-6 hidden">
+        <div class="flex items-start gap-5">
+          <Image
+            src={portraitAsset}
+            alt="Fernando Morán"
+            width={96}
+            height={96}
+            class="w-24 h-24 object-cover grayscale shrink-0 border border-[var(--color-line)]"
+          />
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight m-0">Fernando Morán</h2>
+            <p class="text-sm text-[var(--color-muted)] mt-1">Ingeniería en Ciencias de la Computación · UCSG (6to Semestre)</p>
+            <div class="flex flex-wrap gap-4 mt-3">
+              <a href="/cv-fernando-moran.pdf" target="_blank" class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] no-underline">
+                <span class="link-relay">Descargar CV (PDF) ↗</span>
+              </a>
+              <a href="/lab" class="text-xs font-mono uppercase tracking-wider text-[var(--color-ink)] no-underline">
+                <span class="link-relay">Ir a Certificados ↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm leading-relaxed text-[var(--color-ink)]/90">
+          Desarrollador full-stack con experiencia construyendo sistemas web modernos en producción (React, Hono, Cloudflare Workers, D1/R2 y Node.js). Enfocado en diseñar arquitecturas limpias, autenticación segura con JWT, bases de datos relacionales normalizadas e interfaces con precisión editorial.
+        </p>
+
+        <div class="space-y-4 pt-4 border-t border-[var(--color-line)] text-sm">
+          <div>
+            <span class="block font-mono text-xs uppercase text-[var(--color-muted)] mb-1">01. Lenguajes & Web</span>
+            <span>JavaScript, TypeScript, C++, HTML/CSS, React, Astro, Hono, Node.js, Cloudflare Workers.</span>
+          </div>
+          <div>
+            <span class="block font-mono text-xs uppercase text-[var(--color-muted)] mb-1">02. Bases de Datos & Cloud</span>
+            <span>SQLite, Cloudflare D1 & R2, Normalización SQL, AWS Cloud & Generative AI.</span>
+          </div>
+          <div>
+            <span class="block font-mono text-xs uppercase text-[var(--color-muted)] mb-1">03. Entornos & Herramientas</span>
+            <span>Linux (Fedora, Ubuntu, Kali), Git, VS Code, Cursor, WSL, Cisco Packet Tracer, Unity, Arduino.</span>
+          </div>
+          <div>
+            <span class="block font-mono text-xs uppercase text-[var(--color-muted)] mb-1">04. Idiomas</span>
+            <span>Español (Nativo) · Inglés Intermedio B1 (Certificado TOEFL).</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido Dinámico: Contacto -->
+      <div id="drawer-content-contact" class="space-y-6 hidden">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight m-0">Let's work together.</h2>
+        <p class="text-sm text-[var(--color-muted)] leading-relaxed">
+          Disponible para oportunidades de desarrollo Full-Stack, pasantías de ingeniería de software y proyectos web a medida.
+        </p>
+
+        <div class="space-y-4 pt-4 border-t border-[var(--color-line)] text-sm">
+          <div class="flex flex-col">
+            <span class="text-xs font-mono text-[var(--color-muted)] uppercase">Email</span>
+            <a href="mailto:nandomorancoronel@gmail.com" class="text-lg font-semibold text-[var(--color-ink)] no-underline link-sweep w-fit">
+              nandomorancoronel@gmail.com
+            </a>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="text-xs font-mono text-[var(--color-muted)] uppercase">Perfiles y Credenciales</span>
+            <div class="flex flex-wrap items-center gap-5 mt-1">
+              <a href="https://github.com/Nandofernando28" target="_blank" class="text-[var(--color-ink)] no-underline"><span class="link-relay">GitHub</span></a>
+              <a href="https://www.linkedin.com/in/fernando-mor%C3%A1n" target="_blank" class="text-[var(--color-ink)] no-underline"><span class="link-relay">LinkedIn</span></a>
+              <a href="/cv-fernando-moran.pdf" target="_blank" class="text-[var(--color-ink)] no-underline"><span class="link-relay">Descargar CV</span></a>
+              <a href="/lab" class="text-[var(--color-ink)] no-underline"><span class="link-relay">Certificados</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie del Drawer -->
+    <div class="pt-6 border-t border-[var(--color-line)] flex items-center justify-between text-xs font-mono text-[var(--color-muted)] mt-8">
+      <span>N. — Guayaquil, EC</span>
+      <span>© 2026</span>
+    </div>
+  </aside>
+
+  <!-- Script Maestro: LinkRelay (mod_75669), ChannelSplit (mod_38699/12674), GalleryCanvas Hermite Physics (mod_96767/11715) y HoverPill (mod_22736) -->
+  <script define:vars={{ projects }}>
+    // =========================================================================
+    // 1. FECHA DINÁMICA ESTILO J.MR (mod_10444: "October ‘26")
+    // =========================================================================
+    const dateEl = document.getElementById('availability-date');
+    if (dateEl) {
+      const now = new Date();
+      const month = now.toLocaleString('en-US', { month: 'long' });
+      const yr = String(now.getFullYear()).slice(-2);
+      dateEl.textContent = `${month} ‘${yr}`;
+    }
+
+    // =========================================================================
+    // 2. LINK RELAY INTERACTION (mod_75669: relay-leave + relay-enter)
+    // =========================================================================
+    function initLinkRelays() {
+      if (!window.matchMedia('(hover: hover)').matches) return;
+      document.querySelectorAll('.link-relay').forEach((span) => {
+        const parent = span.parentElement || span;
+        parent.addEventListener('pointerenter', () => {
+          if (!('relay' in span.dataset)) {
+            span.dataset.relay = '';
+          }
+        });
+        span.addEventListener('animationend', (e) => {
+          if (e.animationName === 'relay-enter') {
+            delete span.dataset.relay;
+          }
+        });
+      });
+    }
+    initLinkRelays();
+
+    // =========================================================================
+    // 3. FUNCIONES DE FÍSICA COMPARTIDAS (mod_11715 & mod_12674)
+    // =========================================================================
+    const clampSym = (val, max) => Math.min(Math.max(val, -max), max);
+
+    function decayVelocity(vel, dt, friction) {
+      return vel * Math.pow(friction, 60 * dt);
+    }
+
+    function depositSplit(current, dx, dy, gain, max) {
+      return {
+        x: clampSym(current.x + dx * gain, max),
+        y: clampSym(current.y + dy * gain, max)
+      };
+    }
+
+    function drainSplit(current, dt, friction, eps) {
+      const next = {
+        x: decayVelocity(current.x, dt, friction),
+        y: decayVelocity(current.y, dt, friction)
+      };
+      return Math.abs(next.x) < eps && Math.abs(next.y) < eps ? { x: 0, y: 0 } : next;
+    }
+
+    // =========================================================================
+    // 4. RETRATO CHANNEL SPLIT CON FÍSICA DE FRICCIÓN 0.86 (mod_38699)
+    // =========================================================================
+    const portraitWrapper = document.getElementById('portrait-wrapper');
+    const portraitImg = document.getElementById('portrait-img');
+    const feRed = document.getElementById('fe-red-offset');
+    const feBlue = document.getElementById('fe-blue-offset');
+
+    let portraitSplit = { x: 0, y: 0 };
+    let portraitLastPointer = null;
+    let portraitRaf = null;
+    let portraitLastTime = 0;
+    const PORTRAIT_TUNING = { gain: 0.14, max: 6.5, friction: 0.86 };
+
+    function tickPortraitSplit(now) {
+      const dt = Math.min((now - portraitLastTime) / 1000, 1 / 30);
+      portraitLastTime = now;
+      portraitSplit = drainSplit(portraitSplit, dt, PORTRAIT_TUNING.friction, 0.02);
+
+      if (feRed && feBlue && portraitImg) {
+        feRed.setAttribute('dx', String(portraitSplit.x.toFixed(2)));
+        feRed.setAttribute('dy', String(portraitSplit.y.toFixed(2)));
+        feBlue.setAttribute('dx', String((-portraitSplit.x).toFixed(2)));
+        feBlue.setAttribute('dy', String((-portraitSplit.y).toFixed(2)));
+        portraitImg.style.filter =
+          portraitSplit.x === 0 && portraitSplit.y === 0
+            ? 'grayscale(100%) contrast(1.1)'
+            : 'url(#channel-split-portrait) grayscale(100%) contrast(1.1)';
+      }
+
+      portraitRaf =
+        portraitSplit.x === 0 && portraitSplit.y === 0
+          ? null
+          : requestAnimationFrame(tickPortraitSplit);
+    }
+
+    portraitWrapper?.addEventListener('pointermove', (e) => {
+      if (portraitLastPointer) {
+        portraitSplit = depositSplit(
+          portraitSplit,
+          e.clientX - portraitLastPointer.x,
+          e.clientY - portraitLastPointer.y,
+          PORTRAIT_TUNING.gain,
+          PORTRAIT_TUNING.max
+        );
+        if (portraitRaf === null) {
+          portraitLastTime = performance.now();
+          portraitRaf = requestAnimationFrame(tickPortraitSplit);
+        }
+      }
+      portraitLastPointer = { x: e.clientX, y: e.clientY };
+    });
+
+    portraitWrapper?.addEventListener('pointerleave', () => {
+      portraitLastPointer = null;
+    });
+
+    // =========================================================================
+    // 5. GALLERY CANVAS: HERMITE LAYOUT + VELOCITY/CURSOR RGB SPLIT + HOVER PILL
+    //    (Traducción exacta de mod_11715, mod_96767 y mod_22736)
+    // =========================================================================
+    const boundsEl = document.getElementById('gallery-bounds');
+    const gutterProbe = document.getElementById('gutter-probe');
+    const planeEls = Array.from(document.querySelectorAll('.gallery-plane'));
+    const clientEl = document.getElementById('active-client');
+    const roleEl = document.getElementById('active-role');
+    const counterEl = document.getElementById('gallery-counter');
+
+    // HoverPill refs
+    const pillMaskEl = document.getElementById('hover-pill-mask');
+    const pillBoxEl = document.getElementById('hover-pill-box');
+    const pillBgEl = document.getElementById('hover-pill-bg');
+    const pillMarqueeEl = document.getElementById('hover-pill-marquee');
+
+    const M = projects.length;
+    const instanceCount = planeEls.length; // 10 planos (2 loops de 5)
+
+    // Geometría y curvas de mod_11715
+    const stepSize = (b) => 0.62 * b.height + b.gutter;
+    const loopRank = (val, count) => (count <= 0 ? 0 : -1 + (((val - -1) % count) + count) % count);
+    const hermite = (dist) => {
+      const t = Math.min(Math.abs(dist), 1);
+      return 1 - t * t * (3 - 2 * t);
+    };
+    const entranceOffset = (p, b) => {
+      const inv = 1 - p;
+      return { dx: inv * b.height * 0.25, dy: -inv * b.height * 1.15 };
+    };
+
+    function computeLayout(offset, count, b) {
+      const halfH = b.height / 2;
+      const step = stepSize(b);
+      const startX = -b.width / 2 + b.height;
+      const ranks = Array.from({ length: count }, (_, idx) => loopRank(idx - offset, count));
+
+      return ranks.map((rk) => {
+        const minSide = 0.62 * b.height;
+        const deltaSide = b.height - minSide;
+        const side = minSide + deltaSide * hermite(rk);
+        let shift = 0;
+        for (let j = 0; j < count; j++) {
+          if (ranks[j] > rk) {
+            shift += deltaSide * hermite(ranks[j]);
+          }
+        }
+        const x = startX + rk * step - shift - side / 2;
+        const y = -halfH + side / 2;
+        return {
+          x,
+          y,
+          side,
+          left: b.width / 2 + x - side / 2,
+          top: b.height / 2 - y - side / 2
+        };
+      });
+    }
+
+    // Estado del motor de galería (mod_96767)
+    let bounds = { width: 800, height: 320, gutter: 12 };
+    let offsetD = 0;        // Posición continua del carrusel
+    let velG = 0;           // Velocidad de momentum
+    let dragVelO = 0;       // Velocidad instantánea de drag
+    let stateH = 'entrance'; // 'entrance' | 'idle' | 'momentum' | 'snapping' | 'dragging'
+    let activeIdx = 0;
+    let prevOffsetQ = 0;
+    let scrollAberrX = 0;   // Aberración horizontal global por velocidad
+    const planeAberrK = planeEls.map(() => ({ x: 0, y: 0 })); // Aberración local por tarjeta
+    const entranceP = planeEls.map((_, idx) => ({
+      p: loopRank(idx, instanceCount) < 0 ? 1 : 0,
+      delay: Math.max(0, loopRank(idx, instanceCount)) * 0.08
+    }));
+    let entranceElapsed = -0.25; // Pequeña espera inicial (PHASE_GALLERY = 0.3s)
+
+    // Estado de snapping tween
+    let snapStartOffset = 0;
+    let snapTargetOffset = 0;
+    let snapProgress = 0;
+    const SNAP_DURATION = 0.5;
+
+    // Estado de HoverPill y puntero
+    let hoveredPlane = -1;
+    let pointerClient = { x: 0, y: 0 };
+    let boundsRect = { left: 0, top: 0 };
+    let lastGalleryPointer = null;
+    let screenRects = [];
+
+    function updateHoverPill() {
+      if (!pillMaskEl || !pillBoxEl || !pillBgEl || !pillMarqueeEl) return;
+      if (hoveredPlane < 0 || !screenRects[hoveredPlane]) {
+        pillBgEl.style.transform = 'scale(0)';
+        pillMarqueeEl.style.opacity = '0';
+        return;
+      }
+      const rect = screenRects[hoveredPlane];
+      pillMaskEl.style.transform = `translate3d(${rect.left.toFixed(1)}px, ${rect.top.toFixed(1)}px, 0)`;
+      pillMaskEl.style.width = `${rect.side.toFixed(1)}px`;
+      pillMaskEl.style.height = `${rect.side.toFixed(1)}px`;
+
+      const localX = pointerClient.x - boundsRect.left - rect.left;
+      const localY = pointerClient.y - boundsRect.top - rect.top;
+      pillBoxEl.style.transform = `translate3d(${localX.toFixed(1)}px, ${localY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      pillBgEl.style.transform = 'scale(1)';
+      pillMarqueeEl.style.opacity = '1';
+    }
+
+    function syncActiveProject() {
+      const target = Math.round(offsetD);
+      const nextActive = ((target % M) + M) % M;
+      if (nextActive !== activeIdx) {
+        activeIdx = nextActive;
+        const proj = projects[activeIdx];
+        if (clientEl) clientEl.textContent = proj.client;
+        if (roleEl) roleEl.textContent = proj.role;
+        if (counterEl) {
+          counterEl.textContent = `${String(activeIdx + 1).padStart(2, '0')}/${String(M).padStart(2, '0')}`;
+        }
+      }
+    }
+
+    function renderGalleryFrame() {
+      const baseRects = computeLayout(offsetD, instanceCount, bounds);
+      screenRects = baseRects.map((r, i) => {
+        const { dx, dy } = entranceOffset(entranceP[i].p, bounds);
+        return {
+          left: r.left + dx,
+          top: r.top - dy,
+          side: r.side
+        };
+      });
+
+      planeEls.forEach((el, i) => {
+        const rect = screenRects[i];
+        el.style.transform = `translate3d(${rect.left.toFixed(2)}px, ${rect.top.toFixed(2)}px, 0)`;
+        el.style.width = `${rect.side.toFixed(2)}px`;
+        el.style.height = `${rect.side.toFixed(2)}px`;
+
+        // Escalar sutilmente el resumen interno según si la tarjeta se acerca al 100%
+        const summary = el.querySelector('.card-summary');
+        if (summary) {
+          const ratio = (rect.side / bounds.height - 0.62) / 0.38;
+          summary.style.opacity = String(Math.max(0, Math.min(1, ratio)));
+        }
+
+        // Aplicar filtro SVG de aberración cromática por velocidad + cursor (uAberr de mod_96767)
+        const totalAberrX = (planeAberrK[i].x + scrollAberrX) * 240;
+        const totalAberrY = planeAberrK[i].y * 240;
+        const redNode = document.getElementById(`card-red-${i}`);
+        const blueNode = document.getElementById(`card-blue-${i}`);
+
+        if (Math.abs(totalAberrX) > 0.15 || Math.abs(totalAberrY) > 0.15) {
+          if (redNode && blueNode) {
+            redNode.setAttribute('dx', totalAberrX.toFixed(2));
+            redNode.setAttribute('dy', totalAberrY.toFixed(2));
+            blueNode.setAttribute('dx', (-totalAberrX).toFixed(2));
+            blueNode.setAttribute('dy', (-totalAberrY).toFixed(2));
+            el.style.filter = `url(#card-split-${i})`;
+          }
+        } else {
+          el.style.filter = '';
+        }
+      });
+
+      updateHoverPill();
+    }
+
+    let galleryRaf = null;
+    let lastFrameTime = performance.now();
+
+    function stepGallery(now) {
+      const dt = Math.min((now - lastFrameTime) / 1000, 1 / 30);
+      lastFrameTime = now;
+
+      // 1. Entrada escalonada (entrance)
+      if (stateH === 'entrance') {
+        entranceElapsed += dt;
+        let allDone = true;
+        for (let i = 0; i < instanceCount; i++) {
+          if (entranceP[i].p < 1) {
+            const t = Math.max(0, (entranceElapsed - entranceP[i].delay) / 0.7);
+            if (t < 1) {
+              allDone = false;
+              entranceP[i].p = 1 - Math.pow(1 - t, 3); // power3.out
+            } else {
+              entranceP[i].p = 1;
+            }
+          }
+        }
+        if (allDone) stateH = 'idle';
+      }
+
+      // 2. Momentum y transición a Snapping
+      if (stateH === 'momentum') {
+        offsetD += velG * dt;
+        velG = decayVelocity(velG, dt, 0.92);
+        if (Math.abs(velG) < 0.12) {
+          velG = 0;
+          stateH = 'snapping';
+          snapStartOffset = offsetD;
+          snapTargetOffset = Math.round(offsetD);
+          snapProgress = 0;
+        }
+      } else if (stateH === 'snapping') {
+        snapProgress += dt / SNAP_DURATION;
+        if (snapProgress >= 1) {
+          offsetD = snapTargetOffset;
+          stateH = 'idle';
+        } else {
+          const ease = 1 - Math.pow(1 - snapProgress, 3); // power3.out
+          offsetD = snapStartOffset + (snapTargetOffset - snapStartOffset) * ease;
+        }
+      } else if (stateH === 'dragging') {
+        dragVelO = decayVelocity(dragVelO, dt, 0.85);
+      }
+
+      // 3. Aberración cromática por velocidad de desplazamiento (X) y por tarjeta (K)
+      const speed = dt > 0 ? (offsetD - prevOffsetQ) / dt : 0;
+      prevOffsetQ = offsetD;
+      const excessSpeed = Math.max(Math.abs(speed) - 0.15, 0);
+      const targetAberrX = Math.sign(speed) * Math.min(0.0075 * excessSpeed, 0.038);
+      scrollAberrX += (targetAberrX - scrollAberrX) * (1 - Math.pow(0.72, 60 * dt));
+
+      let hasActiveAberr = false;
+      if (Math.abs(scrollAberrX) < 0.0002) {
+        scrollAberrX = 0;
+      } else {
+        hasActiveAberr = true;
+      }
+
+      for (let i = 0; i < instanceCount; i++) {
+        planeAberrK[i].x = decayVelocity(planeAberrK[i].x, dt, 0.86);
+        planeAberrK[i].y = decayVelocity(planeAberrK[i].y, dt, 0.86);
+        if (Math.abs(planeAberrK[i].x) < 0.0002 && Math.abs(planeAberrK[i].y) < 0.0002) {
+          planeAberrK[i].x = 0;
+          planeAberrK[i].y = 0;
+        } else {
+          hasActiveAberr = true;
+        }
+      }
+
+      syncActiveProject();
+      renderGalleryFrame();
+
+      if (stateH !== 'idle' || hasActiveAberr) {
+        galleryRaf = requestAnimationFrame(stepGallery);
+      } else {
+        galleryRaf = null;
+      }
+    }
+
+    function ensureGalleryLoop() {
+      if (galleryRaf === null) {
+        lastFrameTime = performance.now();
+        galleryRaf = requestAnimationFrame(stepGallery);
+      }
+    }
+
+    function measureGalleryBounds() {
+      if (!boundsEl || !gutterProbe) return;
+      const r = boundsEl.getBoundingClientRect();
+      const g = gutterProbe.getBoundingClientRect().width || 12;
+      boundsRect = { left: r.left, top: r.top };
+      if (r.width > 0 && r.height > 0) {
+        bounds = { width: r.width, height: r.height, gutter: g };
+        renderGalleryFrame();
+      }
+    }
+
+    measureGalleryBounds();
+    if (window.__portfolioLoaderDone) {
+      ensureGalleryLoop();
+    } else {
+      window.addEventListener('portfolio:loader-done', () => {
+        ensureGalleryLoop();
+      }, { once: true });
+    }
+
+    const ro = new ResizeObserver(measureGalleryBounds);
+    if (boundsEl) ro.observe(boundsEl);
+    window.addEventListener('scroll', measureGalleryBounds, { passive: true });
+
+    // Rueda del mouse (Input de momentum continuo idéntico a mod_96767)
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        if (document.getElementById('side-drawer')?.getAttribute('aria-hidden') === 'false') return;
+        if (window.innerWidth < 1024) return;
+        e.preventDefault();
+        if (stateH === 'entrance' || stateH === 'dragging') return;
+        const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+        velG += 0.0045 * delta;
+        stateH = 'momentum';
+        ensureGalleryLoop();
+      },
+      { passive: false }
+    );
+
+    // Drag & Pointer interactions en el escenario de la galería
+    let isPointerDown = false;
+    let dragLastX = 0;
+    let dragDistance = 0;
+    let dragLastStamp = 0;
+    let suppressClick = false;
+
+    boundsEl?.addEventListener('pointerover', (e) => {
+      const card = e.target.closest('[data-plane]');
+      if (card) {
+        hoveredPlane = Number(card.dataset.plane);
+        updateHoverPill();
+      }
+    });
+
+    boundsEl?.addEventListener('pointerout', (e) => {
+      const rel = e.relatedTarget;
+      if (!rel || !boundsEl.contains(rel) || !rel.closest('[data-plane]')) {
+        hoveredPlane = -1;
+        updateHoverPill();
+      }
+    });
+
+    boundsEl?.addEventListener('pointermove', (e) => {
+      pointerClient = { x: e.clientX, y: e.clientY };
+      const localX = e.clientX - boundsRect.left;
+      const localY = e.clientY - boundsRect.top;
+
+      if (lastGalleryPointer && hoveredPlane >= 0 && hoveredPlane < instanceCount) {
+        const k = planeAberrK[hoveredPlane];
+        k.x = clampSym(k.x + (localX - lastGalleryPointer.x) * 0.00009, 0.018);
+        k.y = clampSym(k.y - (localY - lastGalleryPointer.y) * 0.00009, 0.018);
+        ensureGalleryLoop();
+      }
+      lastGalleryPointer = { x: localX, y: localY };
+      updateHoverPill();
+    });
+
+    boundsEl?.addEventListener('pointerleave', () => {
+      lastGalleryPointer = null;
+      hoveredPlane = -1;
+      updateHoverPill();
+    });
+
+    boundsEl?.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0 || stateH === 'entrance') return;
+      isPointerDown = true;
+      suppressClick = false;
+      dragLastX = e.clientX;
+      dragDistance = 0;
+      velG = 0;
+      dragVelO = 0;
+      dragLastStamp = performance.now();
+      stateH = 'dragging';
+      ensureGalleryLoop();
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const dx = e.clientX - dragLastX;
+      dragLastX = e.clientX;
+      dragDistance += Math.abs(dx);
+
+      const step = stepSize(bounds);
+      const dOffset = step > 0 ? -dx / step : 0;
+      offsetD += dOffset;
+
+      const now = performance.now();
+      const dt = Math.max((now - dragLastStamp) / 1000, 1 / 240);
+      dragLastStamp = now;
+      dragVelO += (dOffset / dt - dragVelO) * 0.35;
+
+      if (dragDistance > 8 && boundsEl) {
+        boundsEl.style.cursor = 'grabbing';
+      }
+    });
+
+    function endGalleryDrag() {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      suppressClick = dragDistance > 8;
+      if (boundsEl) boundsEl.style.cursor = 'grab';
+      velG = clampSym(dragVelO, 9);
+      stateH = 'momentum';
+      ensureGalleryLoop();
+    }
+
+    window.addEventListener('pointerup', endGalleryDrag);
+    window.addEventListener('pointercancel', endGalleryDrag);
+
+    // Clic sobre cualquier plano: si no se arrastró, abre el detalle o desliza hacia él
+    planeEls.forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if (suppressClick) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+        const slotIdx = Number(el.dataset.plane);
+        const projIdx = Number(el.dataset.projectIndex);
+        const rk = loopRank(slotIdx - offsetD, instanceCount);
+
+        if (Math.abs(rk) < 0.25) {
+          openProjectDrawer(projIdx);
+        } else {
+          // Deslizar suavemente hacia la tarjeta clicada
+          stateH = 'snapping';
+          snapStartOffset = offsetD;
+          snapTargetOffset = Math.round(offsetD + rk);
+          snapProgress = 0;
+          ensureGalleryLoop();
+        }
+      });
+    });
+
+    // =========================================================================
+    // 6. CONTROL DEL DRAWER LATERAL (Project Detail / About / Contact)
+    // =========================================================================
+    const drawer = document.getElementById('side-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const eyebrow = document.getElementById('drawer-eyebrow');
+    const closeBtn = document.getElementById('close-drawer-btn');
+    const viewDetailBtn = document.getElementById('btn-view-detail');
+
+    const panes = {
+      project: document.getElementById('drawer-content-project'),
+      about: document.getElementById('drawer-content-about'),
+      contact: document.getElementById('drawer-content-contact')
+    };
+
+    function hideAllPanes() {
+      Object.values(panes).forEach((p) => p?.classList.add('hidden'));
+    }
+
+    function openDrawer(type, label) {
+      hideAllPanes();
+      if (panes[type]) panes[type].classList.remove('hidden');
+      if (eyebrow) eyebrow.textContent = label;
+      drawer?.classList.remove('translate-x-full');
+      drawer?.setAttribute('aria-hidden', 'false');
+      backdrop?.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeDrawer() {
+      drawer?.classList.add('translate-x-full');
+      drawer?.setAttribute('aria-hidden', 'true');
+      backdrop?.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function openProjectDrawer(idx) {
+      const p = projects[idx];
+      const dot = document.getElementById('drawer-proj-dot');
+      const yr = document.getElementById('drawer-proj-year');
+      const title = document.getElementById('drawer-proj-title');
+      const sum = document.getElementById('drawer-proj-summary');
+      const client = document.getElementById('drawer-proj-client');
+      const role = document.getElementById('drawer-proj-role');
+      const list = document.getElementById('drawer-proj-list');
+      const stack = document.getElementById('drawer-proj-stack');
+      const projLink = document.getElementById('drawer-proj-link');
+      const projLinkText = document.getElementById('drawer-proj-link-text');
+
+      if (dot) dot.style.backgroundColor = p.color;
+      if (yr) yr.textContent = `${p.badge} — ${p.year}`;
+      if (title) title.textContent = p.title;
+      if (sum) sum.textContent = p.summary;
+      if (client) client.textContent = p.client;
+      if (role) role.textContent = p.role;
+
+      if (projLink && p.liveUrl) {
+        projLink.href = p.liveUrl;
+        projLink.target = p.liveUrl.startsWith('http') ? '_blank' : '_self';
+        projLink.rel = p.liveUrl.startsWith('http') ? 'noreferrer' : '';
+        if (projLinkText) {
+          projLinkText.textContent = p.liveUrl.startsWith('http')
+            ? `Visitar landing page oficial (${p.client}) ↗`
+            : (p.liveUrl === '/lab' ? 'Explorar Certificados ↗' : 'Ver más detalles ↗');
+        }
+      }
+
+      if (list) {
+        list.innerHTML = p.details.map((d) => `<li>${d}</li>`).join('');
+      }
+      if (stack) {
+        stack.innerHTML = p.stack
+          .map((s) => `<span class="px-2.5 py-1 text-xs font-mono bg-white/5 border border-[var(--color-line)] rounded">${s}</span>`)
+          .join('');
+      }
+
+      openDrawer('project', `PROJECT // 0${idx + 1}`);
+    }
+
+    viewDetailBtn?.addEventListener('click', () => openProjectDrawer(activeIdx));
+    closeBtn?.addEventListener('click', closeDrawer);
+    backdrop?.addEventListener('click', closeDrawer);
+
+    document.querySelectorAll('[data-open-drawer]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-open-drawer');
+        if (target === 'close') {
+          closeDrawer();
+        } else if (target === 'about') {
+          openDrawer('about', '01 // ABOUT & CV');
+        } else if (target === 'contact') {
+          openDrawer('contact', '02 // CONTACT');
+        }
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+      if (drawer?.getAttribute('aria-hidden') === 'false') return;
+      if (e.key === 'ArrowRight') {
+        stateH = 'snapping';
+        snapStartOffset = offsetD;
+        snapTargetOffset = Math.round(offsetD) + 1;
+        snapProgress = 0;
+        ensureGalleryLoop();
+      }
+      if (e.key === 'ArrowLeft') {
+        stateH = 'snapping';
+        snapStartOffset = offsetD;
+        snapTargetOffset = Math.round(offsetD) - 1;
+        snapProgress = 0;
+        ensureGalleryLoop();
+      }
+    });
+
+    // =========================================================================
+    // 7. ANIMACIÓN ASCII TERMINAL: EVOLUCIÓN HUMANA (MARCH OF PROGRESS / MORPH)
+    // =========================================================================
+    const asciiScreen = document.getElementById('ascii-screen');
+    const asciiModeBtn = document.getElementById('ascii-mode-btn');
+    const asciiSpeedBtn = document.getElementById('ascii-speed-btn');
+    const asciiEpoch = document.getElementById('ascii-epoch');
+    const asciiWindow = document.getElementById('ascii-terminal-window');
+
+    if (asciiScreen && asciiWindow) {
+      const TOTAL_COLS = 54;
+      const stagesArt = [
+        // 0: Pan troglodytes (Ape)
+        [
+          ["  _       ", " (o)>     ", " /(_\\     ", "/ / \\\\    ", "// /  \\\\  ", "m m    m  "],
+          ["  _       ", " (o)>     ", " /(_\\     ", "//  \\\\    ", "//    \\\\  ", "m      m  "],
+          ["  _       ", " (o)>     ", " /(_\\     ", "\\\\  //    ", " \\\\//     ", "  mm      "]
+        ],
+        // 1: Australopithecus
+        [
+          ["   __     ", "  (o)>    ", "  /( )    ", " / / \\    ", "/ /   \\   ", " m    _\\  "],
+          ["   __     ", "  (o)>    ", "  /( )    ", " / | |    ", "/  | |    ", "   m _\\   "],
+          ["   __     ", "  (o)>    ", "  /( )    ", " /  \\ \\   ", "/    \\ \\  ", "     _\\m  "]
+        ],
+        // 2: Homo erectus
+        [
+          ["    o  |  ", "   /(\\-|  ", "  / |  |  ", "   / \\ |  ", "  /   \\|  ", " _/    \\  "],
+          ["    o  |  ", "   /(\\-|  ", "    |  |  ", "   /|  |  ", "  / |  |  ", "  \\ _\\ |  "],
+          ["    o  |  ", "   /(\\-|  ", "  / |  |  ", "   \\ \\ |  ", "    \\ \\|  ", "    _\\ \\  "]
+        ],
+        // 3: Homo sapiens
+        [
+          ["    O   / ", "   /|\\-/  ", "  / |     ", "   / \\    ", "  /   \\   ", " _/    \\_ "],
+          ["    O   / ", "   /|\\-/  ", "    |     ", "   /|     ", "  / |     ", "  \\ _\\    "],
+          ["    O   / ", "   /|\\-/  ", "  / |     ", "   \\ \\    ", "    \\ \\   ", "    _\\ \\_ "]
+        ],
+        // 4: Full-Stack Developer
+        [
+          ["   (O) [#]", "   /|==// ", "  / |     ", "   / \\    ", "  /   \\   ", " _/    \\_ "],
+          ["   (O) [#]", "   /|==// ", "    |     ", "   /|     ", "  / |     ", "  \\ _\\    "],
+          ["   (O) [#]", "   /|==// ", "  / |     ", "   \\ \\    ", "    \\ \\   ", "    _\\ \\_ "]
+        ]
+      ];
+
+      const groundPattern = "= - = = - - = = = - = = - = = - = = = - - = = - = = = - = = ";
+      const eraLabels = [
+        "3.8M BCE · Pan troglodytes (Knuckle-walking)",
+        "2.4M BCE · Australopithecus (First bipedal steps)",
+        "1.5M BCE · Homo erectus (Fire & tool discovery)",
+        "200K BCE · Homo sapiens (Language, art & reason)",
+        "2026 CE · Full-Stack Developer (Building in terminal)"
+      ];
+
+      let asciiMode = 'parade'; // 'parade' | 'walker'
+      const speeds = [0.5, 1, 1.75];
+      let speedIdx = 0;
+      let frameIdx = 0;
+      let scrollOffset = 0;
+      let walkerX = -6;
+      let lastTick = performance.now();
+      let isVisible = true;
+
+      function renderParade() {
+        const lines = [];
+        for (let r = 0; r < 6; r++) {
+          let row = '';
+          for (let s = 0; s < 5; s++) {
+            row += stagesArt[s][frameIdx % 3][r] + (s < 4 ? ' ' : '');
+          }
+          lines.push(row.slice(0, TOTAL_COLS));
+        }
+        const fullGround = groundPattern + groundPattern + groundPattern;
+        const gSlice = fullGround.slice(scrollOffset % groundPattern.length, (scrollOffset % groundPattern.length) + TOTAL_COLS);
+        lines.push(gSlice);
+        lines.push("Ape       Australo     Erectus      Sapiens      Coder   ");
+        asciiScreen.textContent = lines.join('\n');
+        if (asciiEpoch) asciiEpoch.textContent = "3.8M BCE → 2026 CE // MARCH OF PROGRESS";
+      }
+
+      function renderWalker() {
+        let st = 0;
+        if (walkerX < 6) st = 0;
+        else if (walkerX < 17) st = 1;
+        else if (walkerX < 28) st = 2;
+        else if (walkerX < 39) st = 3;
+        else st = 4;
+
+        const art = stagesArt[st][frameIdx % 3];
+        const lines = [];
+        for (let r = 0; r < 6; r++) {
+          const artRow = art[r];
+          let rowStr = '';
+          if (walkerX < 0) {
+            const cut = -walkerX;
+            rowStr = (artRow.slice(cut) + ' '.repeat(TOTAL_COLS)).slice(0, TOTAL_COLS);
+          } else {
+            rowStr = (' '.repeat(walkerX) + artRow + ' '.repeat(TOTAL_COLS)).slice(0, TOTAL_COLS);
+          }
+          lines.push(rowStr);
+        }
+        lines.push('='.repeat(TOTAL_COLS));
+        const timeline = "3.8M BCE . . . 2.4M BCE . . . 1.5M BCE . . . 200K BCE . . 2026 CE";
+        lines.push(timeline.slice(0, TOTAL_COLS));
+        asciiScreen.textContent = lines.join('\n');
+        if (asciiEpoch) asciiEpoch.textContent = eraLabels[st];
+      }
+
+      function tickAscii(now) {
+        if (!isVisible) {
+          requestAnimationFrame(tickAscii);
+          return;
+        }
+
+        const baseInterval = 130 / speeds[speedIdx];
+        if (now - lastTick >= baseInterval) {
+          lastTick = now;
+          frameIdx = (frameIdx + 1) % 3;
+          scrollOffset = (scrollOffset + 1) % groundPattern.length;
+
+          if (asciiMode === 'parade') {
+            renderParade();
+          } else {
+            walkerX += 1;
+            if (walkerX > TOTAL_COLS + 2) walkerX = -8;
+            renderWalker();
+          }
+        }
+        requestAnimationFrame(tickAscii);
+      }
+
+      // Intersection Observer para pausar cuando no sea visible en pantalla
+      const obs = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting;
+      }, { threshold: 0.1 });
+      obs.observe(asciiWindow);
+
+      function toggleMode() {
+        asciiMode = asciiMode === 'parade' ? 'walker' : 'parade';
+        walkerX = -6;
+        if (asciiModeBtn) {
+          asciiModeBtn.textContent = asciiMode === 'parade' ? 'PARADE ⇄' : 'MORPH ⇄';
+        }
+        if (asciiMode === 'parade') renderParade();
+        else renderWalker();
+      }
+
+      asciiModeBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMode();
+      });
+
+      asciiSpeedBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speedIdx = (speedIdx + 1) % speeds.length;
+        asciiSpeedBtn.textContent = `${speeds[speedIdx]}X`;
+      });
+
+      asciiWindow.addEventListener('click', (e) => {
+        if (e.target === asciiModeBtn || e.target === asciiSpeedBtn) return;
+        toggleMode();
+      });
+
+      renderParade();
+      requestAnimationFrame(tickAscii);
+    }
+
+    // =========================================================================
+    // 8. CUSTOM-SHAPED CURSOR TRAIL SHADER EN EL STATEMENT (BertovDev/cursor-shader-trail)
+    // =========================================================================
+    (function initStatementCursorTrail() {
+      const stageEl = document.getElementById('statement-stage');
+      const headingEl = document.getElementById('statement-heading');
+      const innerEl = document.getElementById('statement-text-inner');
+      const canvas = document.getElementById('statement-trail-canvas');
+      if (!stageEl || !headingEl || !innerEl || !canvas) return;
+
+      const gl =
+        canvas.getContext('webgl2', { alpha: true, antialias: false, premultipliedAlpha: true }) ||
+        canvas.getContext('webgl', { alpha: true, antialias: false, premultipliedAlpha: true });
+      if (!gl) return;
+
+      const isWebGL2 =
+        typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
+      const floatExt = !isWebGL2 ? gl.getExtension('OES_texture_float') : true;
+
+      // Padding amplio alrededor del H1 para que el UV warp (warpStrength = 0.5) nunca se recorte
+      const PAD = 68;
+
+      // Parámetros fieles a shader-trail-experience.tsx y use-grid-trail-texture.ts
+      const PARAMS = {
+        grid: 202,
+        radius: 0.055,
+        strength: 0.7,
+        decay: 0.97,
+        influenceGain: 0.32,
+        influenceGamma: 0.9,
+        brushShape: 'crossSquareCorner', // 'crossSquareCorner' | 'hatch' | 'corner' | 'cross' | 'circle'
+        brushRepeat: 6,
+        brushThickness: 0.44,
+        brushFalloff: 2.6,
+        brushScale: 2.2,
+        patternSize: 0.25,
+        patternThickness: 0.1,
+        patternWidth: 0.92,
+        warpStrength: 0.5,
+        trailBlurRadius: 0.02,
+        trailIntensity: 4.5,
+        trailBloomEdge: 0.05,
+        trailBloomExponent: 1.4,
+        noiseScale: 3.0,
+        noiseSpeed: 0.0,
+        thresholdNoise: 0.46,
+        inkNoiseAmount: 1.0,
+        introDuration: 1.4,
+        introBlur: 0.01,
+        introDirectionDeg: 15,
+        introWave: 0.2
+      };
+
+      const VS_SRC = `
+        attribute vec2 aPos;
+        varying vec2 vUv;
+        void main() {
+          vUv = aPos * 0.5 + 0.5;
+          gl_Position = vec4(aPos, 0.0, 1.0);
+        }
+      `;
+
+      // Pipeline GLSL fiel a build-color-node.ts + simplex-noise-3d.ts + bloom.ts
+      const FS_SRC = `
+        precision highp float;
+        varying vec2 vUv;
+
+        uniform sampler2D uTrailTex;
+        uniform sampler2D uSourceTex;
+        uniform float uTime;
+        uniform float uWarpStrength;
+        uniform float uTrailBlurRadius;
+        uniform float uTrailIntensity;
+        uniform float uTrailBloomEdge;
+        uniform float uTrailBloomExponent;
+        uniform float uNoiseScale;
+        uniform float uNoiseSpeed;
+        uniform float uThresholdNoise;
+        uniform float uInkNoiseAmount;
+        uniform float uIntroReveal;
+        uniform float uIntroBlur;
+        uniform float uAspectScaleY;
+        uniform float uIsFloatTex;
+        uniform vec3 uCoreColor;
+        uniform vec3 uTrailColorLow;
+        uniform vec3 uTrailColorMid;
+        uniform vec3 uTrailColorHigh;
+
+        vec4 permute(vec4 x) {
+          return mod(((x * 34.0) + 1.0) * x, 289.0);
+        }
+        vec4 taylorInvSqrt(vec4 r) {
+          return 1.79284291400159 - 0.85373472095314 * r;
+        }
+        float snoise3(vec3 v) {
+          const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
+          const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+          vec3 i  = floor(v + dot(v, C.yyy));
+          vec3 x0 = v - i + dot(i, C.xxx);
+          vec3 g = step(x0.yzx, x0.xyz);
+          vec3 l = 1.0 - g;
+          vec3 i1 = min(g.xyz, l.zxy);
+          vec3 i2 = max(g.xyz, l.zxy);
+          vec3 x1 = x0 - i1 + C.xxx;
+          vec3 x2 = x0 - i2 + C.yyy;
+          vec3 x3 = x0 - D.yyy;
+          i = mod(i, 289.0);
+          vec4 p = permute(permute(permute(
+                    i.z + vec4(0.0, i1.z, i2.z, 1.0))
+                  + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+                  + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+          float n_ = 1.0 / 7.0;
+          vec3  ns = n_ * D.wyz - D.xzx;
+          vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+          vec4 x_ = floor(j * ns.z);
+          vec4 y_ = floor(j - 7.0 * x_);
+          vec4 x = x_ * ns.x + ns.yyyy;
+          vec4 y = y_ * ns.x + ns.yyyy;
+          vec4 h = 1.0 - abs(x) - abs(y);
+          vec4 b0 = vec4(x.xy, y.xy);
+          vec4 b1 = vec4(x.zw, y.zw);
+          vec4 s0 = floor(b0) * 2.0 + 1.0;
+          vec4 s1 = floor(b1) * 2.0 + 1.0;
+          vec4 sh = -step(h, vec4(0.0));
+          vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+          vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+          vec3 p0 = vec3(a0.xy, h.x);
+          vec3 p1 = vec3(a0.zw, h.y);
+          vec3 p2 = vec3(a1.xy, h.z);
+          vec3 p3 = vec3(a1.zw, h.w);
+          vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
+          p0 *= norm.x;
+          p1 *= norm.y;
+          p2 *= norm.z;
+          p3 *= norm.w;
+          vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
+          m = m * m;
+          return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+        }
+
+        void main() {
+          vec2 _uv = vUv;
+          vec2 aspectVec = vec2(1.0, uAspectScaleY);
+
+          // 1. 9-tap Gaussian blur of the trail (1,2,1 / 2,4,2 / 1,2,1)
+          vec2 r = vec2(uTrailBlurRadius) * aspectVec;
+          vec4 t00 = texture2D(uTrailTex, _uv + vec2(-r.x, -r.y));
+          vec4 t10 = texture2D(uTrailTex, _uv + vec2(0.0, -r.y));
+          vec4 t20 = texture2D(uTrailTex, _uv + vec2(r.x, -r.y));
+          vec4 t01 = texture2D(uTrailTex, _uv + vec2(-r.x, 0.0));
+          vec4 t11 = texture2D(uTrailTex, _uv);
+          vec4 t21 = texture2D(uTrailTex, _uv + vec2(r.x, 0.0));
+          vec4 t02 = texture2D(uTrailTex, _uv + vec2(-r.x, r.y));
+          vec4 t12 = texture2D(uTrailTex, _uv + vec2(0.0, r.y));
+          vec4 t22 = texture2D(uTrailTex, _uv + vec2(r.x, r.y));
+          vec4 trailBlurred = (
+            t00 + t20 + t02 + t22 +
+            (t10 + t01 + t21 + t12) * 2.0 +
+            t11 * 4.0
+          ) / 16.0;
+
+          vec2 flow = uIsFloatTex > 0.5
+            ? trailBlurred.rg
+            : (trailBlurred.rg - 0.5) * 4.0;
+          float speed = clamp(trailBlurred.b, 0.0, 1.0);
+
+          // 2. Warp UVs by the trail flow (build-color-node.ts)
+          vec2 warpedUv = _uv + flow * uWarpStrength * aspectVec;
+
+          // 3. Sample source texture at warped UV (con 5-tap intro blur + halo sutil en velocidad)
+          vec2 srcUv = vec2(warpedUv.x, 1.0 - warpedUv.y);
+          float introBlurRadius = max(uIntroBlur * (1.0 - uIntroReveal), 0.0) + speed * 0.0022;
+          vec2 bRad = vec2(introBlurRadius) * aspectVec;
+          float s0 = texture2D(uSourceTex, srcUv).a;
+          float s1 = texture2D(uSourceTex, srcUv + vec2(bRad.x, bRad.y)).a;
+          float s2 = texture2D(uSourceTex, srcUv + vec2(-bRad.x, bRad.y)).a;
+          float s3 = texture2D(uSourceTex, srcUv + vec2(bRad.x, -bRad.y)).a;
+          float s4 = texture2D(uSourceTex, srcUv + vec2(-bRad.x, -bRad.y)).a;
+          float textMaskRaw = (s0 + s1 + s2 + s3 + s4) * 0.2;
+
+          float introMask = clamp(uIntroReveal, 0.0, 1.0);
+          float textMask = textMaskRaw * introMask;
+
+          if (textMask <= 0.001) {
+            gl_FragColor = vec4(0.0);
+            return;
+          }
+
+          // 4. Simplex 3D noise + per-fragment hash jitter (build-color-node.ts lines 291-322)
+          vec2 noiseUv = vec2(warpedUv.x, warpedUv.y / max(uAspectScaleY, 0.001));
+          float noiseCentre = snoise3(vec3(noiseUv * uNoiseScale, uTime * uNoiseSpeed)) * 0.5 + 0.5;
+          vec2 jitterSeed = _uv + vec2(uTime * 0.013, uTime * 0.017);
+          float jitter = (fract(sin(dot(jitterSeed, vec2(91.534, 47.871))) * 43758.5453) - 0.5) * uThresholdNoise;
+          float tField = noiseCentre + jitter;
+          float inkRaw = clamp(tField, 0.0, 1.0);
+          float ink = mix(1.0, inkRaw, uInkNoiseAmount);
+
+          // Tinta base en reposo (#f9fafb con sutil textura editorial)
+          vec3 restingInk = uCoreColor * mix(0.92, 1.0, ink);
+
+          // 5. 3-stop coloured trail by speed (Mecha de fósforo: Naranja vivo -> Ámbar -> Amarillo incandescente) + Bloom
+          // Re-escalamos tSpeed tras el 9-tap blur para que el núcleo alcance siempre el amarillo brillante
+          float tSpeed = clamp(speed, 0.0, 1.0);
+          float flameSpeed = clamp(tSpeed * 2.4, 0.0, 1.0);
+          float tLowMid = smoothstep(0.0, 0.42, flameSpeed);
+          float tMidHigh = smoothstep(0.38, 0.88, flameSpeed);
+          vec3 trailColor = mix(mix(uTrailColorLow, uTrailColorMid, tLowMid), uTrailColorHigh, tMidHigh);
+
+          float bloomPattern = max(1.0 - flameSpeed, 0.001);
+          float bloomGlow = clamp(pow(uTrailBloomEdge / bloomPattern, uTrailBloomExponent), 0.0, 4.0);
+
+          // Textura granulada cálida (brasa naranja-rojiza en los valles del grano y llama amarilla/naranja brillante en las crestas)
+          vec3 warmEmberBase = uTrailColorLow * (0.68 + 0.32 * ink);
+          float colorDrive = clamp(flameSpeed * 1.35, 0.0, 1.0);
+          float inkGrainMod = mix(0.78, 1.22, ink);
+          vec3 trailLit = mix(warmEmberBase, trailColor * inkGrainMod, colorDrive)
+                        + uTrailColorHigh * (bloomGlow * 0.38 * flameSpeed);
+          trailLit = clamp(trailLit, 0.0, 1.0);
+
+          // Transición rápida y luminosa desde la letra blanca hacia la llama del rastro
+          float trailPresence = smoothstep(0.002, 0.055, tSpeed);
+          vec3 finalColor = mix(restingInk, trailLit, trailPresence);
+
+          // Premultiplied alpha output
+          gl_FragColor = vec4(finalColor * textMask, textMask);
+        }
+      `;
+
+      function compileShader(type, src) {
+        const sh = gl.createShader(type);
+        gl.shaderSource(sh, src);
+        gl.compileShader(sh);
+        if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(sh));
+          gl.deleteShader(sh);
+          return null;
+        }
+        return sh;
+      }
+
+      const vs = compileShader(gl.VERTEX_SHADER, VS_SRC);
+      const fs = compileShader(gl.FRAGMENT_SHADER, FS_SRC);
+      if (!vs || !fs) return;
+
+      const prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+      gl.useProgram(prog);
+
+      const quadBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+        gl.STATIC_DRAW
+      );
+      const aPos = gl.getAttribLocation(prog, 'aPos');
+      gl.enableVertexAttribArray(aPos);
+      gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+      const uLoc = {
+        uTrailTex: gl.getUniformLocation(prog, 'uTrailTex'),
+        uSourceTex: gl.getUniformLocation(prog, 'uSourceTex'),
+        uTime: gl.getUniformLocation(prog, 'uTime'),
+        uWarpStrength: gl.getUniformLocation(prog, 'uWarpStrength'),
+        uTrailBlurRadius: gl.getUniformLocation(prog, 'uTrailBlurRadius'),
+        uTrailIntensity: gl.getUniformLocation(prog, 'uTrailIntensity'),
+        uTrailBloomEdge: gl.getUniformLocation(prog, 'uTrailBloomEdge'),
+        uTrailBloomExponent: gl.getUniformLocation(prog, 'uTrailBloomExponent'),
+        uNoiseScale: gl.getUniformLocation(prog, 'uNoiseScale'),
+        uNoiseSpeed: gl.getUniformLocation(prog, 'uNoiseSpeed'),
+        uThresholdNoise: gl.getUniformLocation(prog, 'uThresholdNoise'),
+        uInkNoiseAmount: gl.getUniformLocation(prog, 'uInkNoiseAmount'),
+        uIntroReveal: gl.getUniformLocation(prog, 'uIntroReveal'),
+        uIntroBlur: gl.getUniformLocation(prog, 'uIntroBlur'),
+        uAspectScaleY: gl.getUniformLocation(prog, 'uAspectScaleY'),
+        uIsFloatTex: gl.getUniformLocation(prog, 'uIsFloatTex'),
+        uCoreColor: gl.getUniformLocation(prog, 'uCoreColor'),
+        uTrailColorLow: gl.getUniformLocation(prog, 'uTrailColorLow'),
+        uTrailColorMid: gl.getUniformLocation(prog, 'uTrailColorMid'),
+        uTrailColorHigh: gl.getUniformLocation(prog, 'uTrailColorHigh')
+      };
+
+      // Textura Float32 del campo de rastro (NearestFilter como en use-grid-trail-texture.ts)
+      let gridW = PARAMS.grid;
+      let gridH = PARAMS.grid;
+      let aspectScaleY = 1.0;
+      let trailData = new Float32Array(gridW * gridH * 4);
+      let trailBytes = !floatExt ? new Uint8Array(gridW * gridH * 4) : null;
+
+      const trailTex = gl.createTexture();
+      function allocateTrailTexture(newW, newH) {
+        gridW = Math.max(64, newW);
+        gridH = Math.max(48, newH);
+        trailData = new Float32Array(gridW * gridH * 4);
+        gl.bindTexture(gl.TEXTURE_2D, trailTex);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        if (isWebGL2) {
+          gl.texImage2D(
+            gl.TEXTURE_2D,
+            0,
+            gl.RGBA32F,
+            gridW,
+            gridH,
+            0,
+            gl.RGBA,
+            gl.FLOAT,
+            trailData
+          );
+        } else if (floatExt) {
+          gl.texImage2D(
+            gl.TEXTURE_2D,
+            0,
+            gl.RGBA,
+            gridW,
+            gridH,
+            0,
+            gl.RGBA,
+            gl.FLOAT,
+            trailData
+          );
+        } else {
+          trailBytes = new Uint8Array(gridW * gridH * 4);
+          for (let i = 0; i < gridW * gridH; i++) {
+            trailBytes[i * 4] = 128;
+            trailBytes[i * 4 + 1] = 128;
+            trailBytes[i * 4 + 2] = 0;
+            trailBytes[i * 4 + 3] = 255;
+          }
+          gl.texImage2D(
+            gl.TEXTURE_2D,
+            0,
+            gl.RGBA,
+            gridW,
+            gridH,
+            0,
+            gl.RGBA,
+            gl.UNSIGNED_BYTE,
+            trailBytes
+          );
+        }
+      }
+      allocateTrailTexture(PARAMS.grid, PARAMS.grid);
+
+      // Textura de las letras del statement medida palabra por palabra desde el DOM real
+      const sourceCanvas = document.createElement('canvas');
+      const sourceCtx = sourceCanvas.getContext('2d');
+      const sourceTex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, sourceTex);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+      let canvasBounds = { left: 0, top: 0, width: 1, height: 1 };
+
+      function paintStatementTexture() {
+        if (!sourceCtx) return;
+        const hRect = headingEl.getBoundingClientRect();
+        if (hRect.width <= 0 || hRect.height <= 0) return;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const fullW = Math.round(hRect.width + PAD * 2);
+        const fullH = Math.round(hRect.height + PAD * 2);
+
+        // Ajustar la cuadrícula para mantener celdas cuadradas proporcionales al stage 16:10 del repo
+        const rawAspect = fullW / Math.max(1, fullH);
+        aspectScaleY = rawAspect / 1.6;
+        const targetGridW = PARAMS.grid;
+        const targetGridH = Math.max(72, Math.round(PARAMS.grid / Math.max(1, aspectScaleY)));
+        if (targetGridW !== gridW || targetGridH !== gridH) {
+          allocateTrailTexture(targetGridW, targetGridH);
+        }
+
+        canvas.style.left = `${-PAD}px`;
+        canvas.style.top = `${-PAD}px`;
+        canvas.style.width = `${fullW}px`;
+        canvas.style.height = `${fullH}px`;
+        canvas.width = Math.round(fullW * dpr);
+        canvas.height = Math.round(fullH * dpr);
+
+        sourceCanvas.width = canvas.width;
+        sourceCanvas.height = canvas.height;
+        sourceCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        sourceCtx.clearRect(0, 0, fullW, fullH);
+
+        const cs = window.getComputedStyle(headingEl);
+        sourceCtx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        if ('letterSpacing' in sourceCtx && cs.letterSpacing && cs.letterSpacing !== 'normal') {
+          sourceCtx.letterSpacing = cs.letterSpacing;
+        }
+        sourceCtx.fillStyle = '#ffffff';
+        sourceCtx.textBaseline = 'top';
+
+        // Medir cada palabra desde el nodo de texto del DOM para alineación tipográfica exacta
+        const textNode = innerEl.firstChild;
+        const innerRect = innerEl.getBoundingClientRect();
+        if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+          const raw = textNode.textContent || '';
+          const range = document.createRange();
+          const regex = /\S+/g;
+          let match;
+          while ((match = regex.exec(raw)) !== null) {
+            range.setStart(textNode, match.index);
+            range.setEnd(textNode, match.index + match[0].length);
+            const r = range.getBoundingClientRect();
+            const wx = r.left - innerRect.left;
+            const wy = r.top - innerRect.top;
+            sourceCtx.fillText(match[0], PAD + wx, PAD + wy);
+          }
+        }
+
+        gl.bindTexture(gl.TEXTURE_2D, sourceTex);
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sourceCanvas);
+
+        const cRect = canvas.getBoundingClientRect();
+        canvasBounds = {
+          left: cRect.left,
+          top: cRect.top,
+          width: Math.max(1, cRect.width),
+          height: Math.max(1, cRect.height)
+        };
+
+        // Ocultar el texto DOM visualmente (manteniéndolo accesible y ocupando su flujo)
+        headingEl.style.opacity = '0';
+      }
+
+      // Estado del rastro y cursor virtual de intro (use-grid-trail-texture.ts)
+      let rawPointer = null;
+      let pointerPos = { x: 0, y: 0 };
+      let pointerVel = { x: 0, y: 0 };
+      let hasReceivedPointer = false;
+      let introT = 0;
+      let startTime = performance.now();
+      let lastFrame = performance.now();
+      let rafId = null;
+
+      function updateBoundsOnly() {
+        const cRect = canvas.getBoundingClientRect();
+        if (cRect.width > 0) {
+          canvasBounds = {
+            left: cRect.left,
+            top: cRect.top,
+            width: cRect.width,
+            height: cRect.height
+          };
+        }
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        const x = (e.clientX - canvasBounds.left) / canvasBounds.width;
+        const y = (e.clientY - canvasBounds.top) / canvasBounds.height;
+        if (x >= -0.02 && x <= 1.02 && y >= -0.02 && y <= 1.02) {
+          const ndcX = Math.max(0, Math.min(2, x * 2));
+          const ndcY = Math.max(0, Math.min(2, y * 2));
+          if (!hasReceivedPointer) {
+            pointerPos.x = ndcX;
+            pointerPos.y = ndcY;
+            hasReceivedPointer = true;
+          }
+          rawPointer = { x: ndcX, y: ndcY };
+          ensureTrailLoop();
+        } else if (rawPointer !== null) {
+          rawPointer = null;
+          hasReceivedPointer = false;
+          pointerVel.x = 0;
+          pointerVel.y = 0;
+        }
+      });
+
+      function stampBrushAt(cellX, cellY, vxGrid, vyGrid, stepScale) {
+        const w = gridW;
+        const h = gridH;
+        const mouseRadius = w * PARAMS.radius;
+        const distMax = mouseRadius * mouseRadius;
+        const HALF_EDGE = 0.005;
+        const SPEED_SATURATION = 1.0;
+
+        const speedGrid = Math.hypot(vxGrid, vyGrid);
+        if (speedGrid <= 0.0001) return false;
+
+        const gamma = PARAMS.influenceGamma;
+        const vxCurved = Math.sign(vxGrid) * Math.pow(Math.abs(vxGrid), gamma);
+        const vyCurved = Math.sign(vyGrid) * Math.pow(Math.abs(vyGrid), gamma);
+        const speedCurved = Math.pow(speedGrid, gamma);
+        const len = Math.hypot(vxCurved, vyCurved) || 1;
+        const ndx = vxCurved / len;
+        const ndy = vyCurved / len;
+
+        const minX = Math.max(0, Math.floor(cellX - mouseRadius - 1));
+        const maxX = Math.min(w - 1, Math.ceil(cellX + mouseRadius + 1));
+        const minY = Math.max(0, Math.floor(cellY - mouseRadius - 1));
+        const maxY = Math.min(h - 1, Math.ceil(cellY + mouseRadius + 1));
+
+        for (let x = minX; x <= maxX; x++) {
+          for (let y = minY; y <= maxY; y++) {
+            const dx = x + 0.5 - cellX;
+            const dy = y + 0.5 - cellY;
+            const distSq = dx * dx + dy * dy;
+            if (distSq >= distMax || distSq <= 0) continue;
+
+            let force = 0;
+            if (PARAMS.brushShape === 'circle') {
+              const dist = Math.sqrt(distSq);
+              force = Math.max(0, Math.min(10, mouseRadius / dist));
+            } else {
+              const lx = dx / mouseRadius;
+              const ly = dy / mouseRadius;
+              const rNorm = Math.sqrt(distSq) / mouseRadius;
+              let patternMask = 0;
+
+              if (PARAMS.brushShape === 'hatch') {
+                const ru = (lx - ly) * Math.SQRT1_2;
+                const stripe = (((ru * PARAMS.brushRepeat) % 1) + 1) % 1;
+                if (stripe <= PARAMS.brushThickness) {
+                  patternMask = 0;
+                } else if (stripe >= PARAMS.brushThickness + HALF_EDGE) {
+                  patternMask = 1;
+                } else {
+                  const t = (stripe - PARAMS.brushThickness) / HALF_EDGE;
+                  patternMask = t * t * (3 - 2 * t);
+                }
+              } else if (PARAMS.brushShape === 'corner') {
+                const sdBox = Math.max(Math.abs(lx), Math.abs(ly));
+                const innerSquare = sdBox <= PARAMS.patternSize ? 1 : 0;
+                const vL = Math.abs(lx) <= PARAMS.patternThickness ? 1 : 0;
+                const hL = Math.abs(ly) <= PARAMS.patternThickness ? 1 : 0;
+                const cross = Math.max(0, Math.min(1, vL + hL));
+                patternMask = Math.max(0, Math.min(1, cross + innerSquare));
+              } else if (PARAMS.brushShape === 'crossSquareCorner') {
+                const vL = Math.abs(lx) <= PARAMS.patternThickness ? 1 : 0;
+                const hL = Math.abs(ly) <= PARAMS.patternThickness ? 1 : 0;
+                const cross = Math.max(0, Math.min(1, vL + hL));
+                const invertedCross = 1 - cross;
+                const ruX = (lx - ly) * Math.SQRT1_2;
+                const ruY = (lx + ly) * Math.SQRT1_2;
+                const cvL = 1 - Math.abs(ruX) >= PARAMS.patternWidth ? 1 : 0;
+                const chL = 1 - Math.abs(ruY) >= PARAMS.patternWidth ? 1 : 0;
+                const diag = Math.max(0, Math.min(1, cvL + chL));
+                patternMask = Math.max(0, Math.min(1, invertedCross + diag));
+              } else if (PARAMS.brushShape === 'cross') {
+                const ruX = (lx - ly) * Math.SQRT1_2;
+                const ruY = (lx + ly) * Math.SQRT1_2;
+                const vL = 1 - Math.abs(ruX) >= PARAMS.patternWidth ? 1 : 0;
+                const hL = 1 - Math.abs(ruY) >= PARAMS.patternWidth ? 1 : 0;
+                const lines = Math.max(0, Math.min(1, vL + hL));
+                const sdDiamond = Math.abs(lx) + Math.abs(ly);
+                const mask = sdDiamond <= PARAMS.patternSize ? 1 : 0;
+                patternMask = mask * lines;
+              }
+
+              const envelope = Math.pow(1 - rNorm, PARAMS.brushFalloff);
+              force = envelope * patternMask * PARAMS.brushScale;
+            }
+
+            if (force <= 0) continue;
+
+            const idx = 4 * (x + w * y);
+            const scale = PARAMS.influenceGain * PARAMS.strength * force * stepScale;
+            const dispBase = scale * speedCurved;
+
+            trailData[idx] += dispBase * -ndx;
+            trailData[idx + 1] += dispBase * ndy;
+            const nextSpd = trailData[idx + 2] + scale * speedCurved;
+            trailData[idx + 2] = nextSpd > SPEED_SATURATION ? SPEED_SATURATION : nextSpd;
+            trailData[idx + 3] = 1.0;
+          }
+        }
+        return true;
+      }
+
+      function stepTrailField(activePointer, dt) {
+        const decay = Math.pow(PARAMS.decay, dt * 60);
+        let maxEnergy = 0;
+
+        for (let i = 0; i < trailData.length; i += 4) {
+          trailData[i] *= decay;
+          trailData[i + 1] *= decay;
+          trailData[i + 2] *= decay;
+          const e =
+            Math.abs(trailData[i]) + Math.abs(trailData[i + 1]) + trailData[i + 2];
+          if (e > maxEnergy) maxEnergy = e;
+        }
+
+        if (activePointer) {
+          // Suavizado ligero para continuidad entre eventos de ratón y pantallas de 120Hz+
+          const lerp = 0.65;
+          const nextX = pointerPos.x + (activePointer.x - pointerPos.x) * lerp;
+          const nextY = pointerPos.y + (activePointer.y - pointerPos.y) * lerp;
+          const dxNdc = nextX - pointerPos.x;
+          const dyNdc = nextY - pointerPos.y;
+
+          const startCellX = pointerPos.x * 0.5 * gridW;
+          const startCellY = (2 - pointerPos.y) * 0.5 * gridH;
+          const endCellX = nextX * 0.5 * gridW;
+          const endCellY = (2 - nextY) * 0.5 * gridH;
+
+          pointerPos.x = nextX;
+          pointerPos.y = nextY;
+          pointerVel.x = dxNdc;
+          pointerVel.y = dyNdc;
+
+          const vxGrid = dxNdc * (gridW / 2);
+          const vyGrid = -dyNdc * (gridH / 2);
+          const cellStepDist = Math.hypot(endCellX - startCellX, endCellY - startCellY);
+          const maxStep = Math.max(1.5, gridW * PARAMS.radius * 0.35);
+          const steps = Math.min(8, Math.max(1, Math.ceil(cellStepDist / maxStep)));
+
+          for (let s = 1; s <= steps; s++) {
+            const t = s / steps;
+            const cx = startCellX + (endCellX - startCellX) * t;
+            const cy = startCellY + (endCellY - startCellY) * t;
+            if (stampBrushAt(cx, cy, vxGrid, vyGrid, 1 / Math.sqrt(steps))) {
+              maxEnergy = 1;
+            }
+          }
+        }
+
+        gl.bindTexture(gl.TEXTURE_2D, trailTex);
+        if (isWebGL2 || floatExt) {
+          gl.texSubImage2D(
+            gl.TEXTURE_2D,
+            0,
+            0,
+            0,
+            gridW,
+            gridH,
+            gl.RGBA,
+            gl.FLOAT,
+            trailData
+          );
+        } else if (trailBytes) {
+          for (let i = 0; i < trailData.length; i += 4) {
+            trailBytes[i] = Math.round(Math.max(0, Math.min(1, trailData[i] * 0.25 + 0.5)) * 255);
+            trailBytes[i + 1] = Math.round(
+              Math.max(0, Math.min(1, trailData[i + 1] * 0.25 + 0.5)) * 255
+            );
+            trailBytes[i + 2] = Math.round(Math.max(0, Math.min(1, trailData[i + 2])) * 255);
+          }
+          gl.texSubImage2D(
+            gl.TEXTURE_2D,
+            0,
+            0,
+            0,
+            gridW,
+            gridH,
+            gl.RGBA,
+            gl.UNSIGNED_BYTE,
+            trailBytes
+          );
+        }
+
+        return maxEnergy;
+      }
+
+      function renderStatementTrail(now) {
+        const dt = Math.min((now - lastFrame) / 1000, 1 / 24);
+        lastFrame = now;
+
+        // Barrido virtual inicial (intro de shader-trail-experience.tsx)
+        let activePtr = rawPointer;
+        let introReveal = 1;
+        if (introT < 1) {
+          introT = Math.min(1, introT + dt / PARAMS.introDuration);
+          const p = introT;
+          introReveal = p * p * (3 - 2 * p);
+          const t = 1 - Math.pow(1 - p, 3);
+          const rad = (PARAMS.introDirectionDeg * Math.PI) / 180;
+          const dirX = Math.cos(rad);
+          const dirY = Math.sin(rad);
+          const span = Math.abs(dirX) + Math.abs(dirY);
+          const swing = Math.sin(t * Math.PI * 2) * PARAMS.introWave * 0.5;
+          const uvX = 0.5 + dirX * (t - 0.5) * span - dirY * swing;
+          const uvY = 0.5 + dirY * (t - 0.5) * span + dirX * swing;
+          const vx = Math.max(0, Math.min(2, uvX * 2));
+          const vy = Math.max(0, Math.min(2, (1 - uvY) * 2));
+          if (!hasReceivedPointer) {
+            pointerPos.x = vx;
+            pointerPos.y = vy;
+            hasReceivedPointer = true;
+          }
+          activePtr = { x: vx, y: vy };
+          if (introT >= 1 && rawPointer === null) {
+            hasReceivedPointer = false;
+          }
+        }
+
+        const maxEnergy = stepTrailField(activePtr, dt);
+
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+        gl.useProgram(prog);
+        gl.uniform1f(uLoc.uTime, (now - startTime) * 0.001);
+        gl.uniform1f(uLoc.uWarpStrength, PARAMS.warpStrength);
+        gl.uniform1f(uLoc.uTrailBlurRadius, PARAMS.trailBlurRadius);
+        gl.uniform1f(uLoc.uTrailIntensity, PARAMS.trailIntensity);
+        gl.uniform1f(uLoc.uTrailBloomEdge, PARAMS.trailBloomEdge);
+        gl.uniform1f(uLoc.uTrailBloomExponent, PARAMS.trailBloomExponent);
+        gl.uniform1f(uLoc.uNoiseScale, PARAMS.noiseScale);
+        gl.uniform1f(uLoc.uNoiseSpeed, PARAMS.noiseSpeed);
+        gl.uniform1f(uLoc.uThresholdNoise, PARAMS.thresholdNoise);
+        gl.uniform1f(uLoc.uInkNoiseAmount, PARAMS.inkNoiseAmount);
+        gl.uniform1f(uLoc.uIntroReveal, introReveal);
+        gl.uniform1f(uLoc.uIntroBlur, PARAMS.introBlur);
+        gl.uniform1f(uLoc.uAspectScaleY, aspectScaleY);
+        gl.uniform1f(uLoc.uIsFloatTex, isWebGL2 || floatExt ? 1.0 : 0.0);
+
+        // Colores: Tinta #f9fafb y rampa luminosa de mecha de fósforo (Naranja vivo -> Ámbar -> Amarillo brillante)
+        // Low: #FF4D1A (1.0, 0.302, 0.102) -> Mid: #FF9419 (1.0, 0.580, 0.098) -> High: #FFE63B (1.0, 0.902, 0.231)
+        gl.uniform3f(uLoc.uCoreColor, 0.976, 0.98, 0.984);
+        gl.uniform3f(uLoc.uTrailColorLow, 1.0, 0.302, 0.102);
+        gl.uniform3f(uLoc.uTrailColorMid, 1.0, 0.58, 0.098);
+        gl.uniform3f(uLoc.uTrailColorHigh, 1.0, 0.902, 0.231);
+
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, trailTex);
+        gl.uniform1i(uLoc.uTrailTex, 0);
+
+        gl.activeTexture(gl.TEXTURE1);
+        gl.bindTexture(gl.TEXTURE_2D, sourceTex);
+        gl.uniform1i(uLoc.uSourceTex, 1);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        if (introT < 1 || rawPointer !== null || maxEnergy > 0.002) {
+          rafId = requestAnimationFrame(renderStatementTrail);
+        } else {
+          rafId = null;
+        }
+      }
+
+      function ensureTrailLoop() {
+        if (rafId === null) {
+          lastFrame = performance.now();
+          rafId = requestAnimationFrame(renderStatementTrail);
+        }
+      }
+
+      function bootStatementShader() {
+        paintStatementTexture();
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(() => {
+            paintStatementTexture();
+            ensureTrailLoop();
+          });
+        }
+        ensureTrailLoop();
+      }
+
+      if (window.__portfolioLoaderDone) {
+        bootStatementShader();
+      } else {
+        window.addEventListener('portfolio:loader-done', bootStatementShader, { once: true });
+      }
+
+      const roStatement = new ResizeObserver(() => {
+        paintStatementTexture();
+        ensureTrailLoop();
+      });
+      roStatement.observe(headingEl);
+      window.addEventListener('scroll', updateBoundsOnly, { passive: true });
+    })();
+  </script>
+</Layout>

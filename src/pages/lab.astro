@@ -1,0 +1,1202 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const labCertificates = [
+  {
+    slug: "aws-cloud-practitioner",
+    title: "AWS Cloud Practitioner",
+    fullTitle: "AWS Cloud Practitioner Essentials",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    file: "/Certificados/AWS Cloud Practitioner Essentials.pdf",
+    image: "/Certificados/AWS Cloud Practitioner Essentials.png",
+    description: "Amazon Web Services, 2026 — Fundamentos de arquitectura en la nube, cómputo EC2/Lambda, almacenamiento S3, redes VPC, seguridad IAM y modelos de costos en AWS.",
+    rect: { x: 80, y: 80, w: 440, h: 340 }
+  },
+  {
+    slug: "aws-infra-genai",
+    title: "Infraestructura con GenAI",
+    fullTitle: "Generación de Infraestructura con IA Generativa",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    file: "/Certificados/AWS - Generacion de Infrestructura con Inteligencia Artificial Generativa.png",
+    image: "/Certificados/AWS - Generacion de Infrestructura con Inteligencia Artificial Generativa.png",
+    description: "Amazon Web Services, 2026 — Automatización y despliegue de infraestructura como código (IaC) asistida por modelos de Inteligencia Artificial Generativa en AWS.",
+    rect: { x: 640, y: 60, w: 450, h: 318 }
+  },
+  {
+    slug: "toefl-itp",
+    title: "TOEFL Certification (B1)",
+    fullTitle: "ETS TOEFL English Proficiency Certification",
+    issuer: "ETS TOEFL",
+    year: "2026",
+    file: "/Certificados/TOEFL.pdf",
+    image: "/Certificados/TOEFL.png",
+    description: "Educational Testing Service (ETS), 2026 — Acreditación internacional de dominio del idioma inglés (Nivel Intermedio B1) en comprensión auditiva, estructura y lectura.",
+    rect: { x: 1210, y: 90, w: 340, h: 442 }
+  },
+  {
+    slug: "aws-prompt-engineering",
+    title: "Prompt Engineering",
+    fullTitle: "AWS Essentials of Prompt Engineering",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    file: "/Certificados/AWS Essentials of Prompt Engineering.pdf",
+    image: "/Certificados/AWS Essentials of Prompt Engineering.png",
+    description: "Amazon Web Services, 2026 — Diseño estructurado de prompts, técnicas Zero-Shot, Few-Shot y Chain-of-Thought para optimización de modelos fundacionales.",
+    rect: { x: 1680, y: 70, w: 430, h: 332 }
+  },
+  {
+    slug: "cisco-intro-cybersecurity-badge",
+    title: "Cybersecurity Badge",
+    fullTitle: "Introduction to Cybersecurity (Cisco Badge)",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    file: "/Certificados/introduction-to-cybersecurity.png",
+    image: "/Certificados/introduction-to-cybersecurity.png",
+    description: "Cisco Networking Academy, 2026 — Insignia oficial verificada en defensa de activos, análisis de amenazas cibernéticas y seguridad operativa.",
+    rect: { x: 2240, y: 95, w: 300, h: 300 }
+  },
+  {
+    slug: "cisco-exploring-networking",
+    title: "Exploring Networking",
+    fullTitle: "Exploring Networking with Cisco Packet Tracer",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    file: "/Certificados/Exploring_Networking_with_Cisco_Packet_Tracer.pdf",
+    image: "/Certificados/Exploring_Networking_with_Cisco_Packet_Tracer.png",
+    description: "Cisco Networking Academy, 2026 — Diseño, simulación y diagnóstico de redes LAN/WAN, direccionamiento IP y protocolos de enrutamiento en Cisco Packet Tracer.",
+    rect: { x: 120, y: 540, w: 470, h: 318 }
+  },
+  {
+    slug: "aws-workshop-genai",
+    title: "Workshop App con GenAI",
+    fullTitle: "Workshop: Crea tu primera aplicación con Gen AI en AWS",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    file: "/Certificados/Workshop Crea tu primera aplicacion con Gen Al en AWS.png",
+    image: "/Certificados/Workshop Crea tu primera aplicacion con Gen Al en AWS.png",
+    description: "Amazon Web Services, 2026 — Laboratorio práctico de construcción e integración de aplicaciones reales impulsadas por IA Generativa sobre servicios cloud de AWS.",
+    rect: { x: 700, y: 490, w: 455, h: 320 }
+  },
+  {
+    slug: "aws-responsible-ai",
+    title: "Responsible AI",
+    fullTitle: "AWS Introduction to Responsible AI",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    file: "/Certificados/AWS Introduction to Responsible AI.pdf",
+    image: "/Certificados/AWS Introduction to Responsible AI.png",
+    description: "Amazon Web Services, 2026 — Marcos de equidad, explicabilidad, privacidad, seguridad y gobernanza responsable en sistemas de Inteligencia Artificial.",
+    rect: { x: 1650, y: 510, w: 430, h: 332 }
+  },
+  {
+    slug: "cisco-getting-started",
+    title: "Cisco Packet Tracer",
+    fullTitle: "Getting Started with Cisco Packet Tracer",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    file: "/Certificados/Getting_Started_with_Cisco_Packet_Tracer.pdf",
+    image: "/Certificados/Getting_Started_with_Cisco_Packet_Tracer.png",
+    description: "Cisco Networking Academy, 2026 — Configuración de dispositivos de red virtuales, switches, routers y telemetría de paquetes en entornos simulados.",
+    rect: { x: 2200, y: 500, w: 465, h: 315 }
+  },
+  {
+    slug: "aws-genai-executives",
+    title: "GenAI Strategy",
+    fullTitle: "AWS Generative AI for Executives",
+    issuer: "Amazon Web Services",
+    year: "2026",
+    file: "/Certificados/AWS Generative AI for Executives.pdf",
+    image: "/Certificados/AWS Generative AI for Executives.png",
+    description: "Amazon Web Services, 2026 — Estrategia de adopción de Inteligencia Artificial Generativa en entornos productivos y casos de uso empresariales.",
+    rect: { x: 240, y: 980, w: 430, h: 332 }
+  },
+  {
+    slug: "cisco-cybersec-packet-tracer",
+    title: "Cybersecurity Certificate",
+    fullTitle: "Introducción a Ciberseguridad con Cisco Packet Tracer",
+    issuer: "Cisco Networking Academy",
+    year: "2026",
+    file: "/Certificados/Introducción_a_Ciberseguridad_with_Cisco_Packet_Tracer.pdf",
+    image: "/Certificados/Introduccion_a_Ciberseguridad_with_Cisco_Packet_Tracer.png",
+    description: "Cisco Networking Academy, 2026 — Prácticas de endurecimiento de red, control de accesos y mitigación de vulnerabilidades sobre topologías Cisco.",
+    rect: { x: 820, y: 950, w: 465, h: 315 }
+  },
+  {
+    slug: "toefl-junior",
+    title: "TOEFL Junior",
+    fullTitle: "ETS TOEFL Junior Academic Certification",
+    issuer: "ETS TOEFL",
+    year: "2024",
+    file: "/Certificados/TOEFL Junior.pdf",
+    image: "/Certificados/TOEFL Junior.png",
+    description: "Educational Testing Service (ETS) — Certificación oficial de competencias comunicativas y académicas en lengua inglesa.",
+    rect: { x: 1440, y: 960, w: 448, h: 320 }
+  }
+];
+
+const cluster = { w: 2800, h: 1420 };
+---
+
+<Layout
+  title="Certificates · Lab · N."
+  description="An infinite field of credentials & technical certifications — drag toward any corner."
+>
+  <!-- =====================================================
+       LAB SHELL (Traducción exacta de LabShell mod_78896 en juanmoraromero.com/lab)
+       ===================================================== -->
+  <div
+    id="lab-shell"
+    class="fixed inset-0 isolate h-dvh w-screen touch-none overflow-hidden overscroll-none select-none bg-[var(--color-bg)]"
+  >
+    <!-- 1. LIENZO INFINITO WEBGL + HIT LAYER + HOVER PILL -->
+    <div id="lab-field-root" class="absolute inset-0 cursor-grab touch-none select-none">
+      <canvas id="lab-webgl-canvas" class="absolute inset-0 block w-full h-full"></canvas>
+      <div id="lab-hit-layer" class="absolute inset-0"></div>
+
+      <!-- HoverPill Oficial de j.mr (mod_22736: máscara recortada a la pieza + mix-blend-difference + marquee) -->
+      <div
+        id="lab-pill-mask"
+        aria-hidden="true"
+        class="absolute top-0 left-0 overflow-hidden mix-blend-difference pointer-events-none select-none will-change-transform z-[3]"
+        style="width: 0px; height: 0px;"
+      >
+        <div
+          id="lab-pill-box"
+          class="absolute top-0 left-0 w-vw-122 h-vw-34 rounded-vw-17 overflow-hidden flex items-center text-[#000000] will-change-transform"
+        >
+          <div
+            id="lab-pill-bg"
+            class="absolute inset-0 rounded-[inherit] bg-[#ffffff]"
+            style="transform: scale(0); transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);"
+          ></div>
+          <div
+            id="lab-pill-marquee"
+            class="t-ui hover-pill-marquee relative flex shrink-0 min-w-max whitespace-nowrap z-10"
+            style="opacity: 0; transition: opacity 220ms ease;"
+          >
+            {Array.from({ length: 4 }).map(() => (
+              <span class="flex items-center">
+                <span class="lab-pill-text px-2.5">Certificate</span>
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-current opacity-35"></span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador flotante inferior con los mismos colores de la ventana principal -->
+    <div class="pointer-events-none fixed bottom-4 left-[var(--marge-x)] right-[var(--marge-x)] z-[3] flex items-center justify-between text-[var(--color-muted)] t-ui">
+      <span>Drag or scroll toward any corner — 360° infinite field</span>
+      <span class="font-mono text-xs uppercase tracking-wider text-[var(--color-ink)]">{labCertificates.length} Credentials</span>
+    </div>
+
+    <!-- 2. BACKDROP DEL SIDE-DRAWER (Idéntico al de index.astro) -->
+    <div
+      id="lab-scrim"
+      aria-hidden="true"
+      class="fixed inset-0 z-40 bg-black/50 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-500"
+    ></div>
+
+    <!-- 3. SIDE-DRAWER (Mismo tamaño, colores #282626 / #f9fafb y estructura exacta que Contact en index.astro) -->
+    <aside
+      id="lab-panel"
+      aria-label="Detalle del certificado"
+      aria-hidden="true"
+      class="fixed top-0 right-0 z-50 h-svh w-full max-w-xl bg-[#282626] text-[#f9fafb] border-l border-[#4a4747] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.625,0.05,0,1)] flex flex-col justify-between overflow-y-auto p-6 sm:p-10"
+    >
+      <div>
+        <!-- Cabecera del Side-Drawer (idéntica a Contact en index.astro) -->
+        <div class="flex items-center justify-between pb-6 border-b border-[#4a4747] mb-8">
+          <span id="lab-drawer-eyebrow" class="font-mono text-xs uppercase tracking-widest text-[#b5b3b3]">
+            CREDENTIAL // VIEW
+          </span>
+          <button
+            id="lab-panel-close"
+            type="button"
+            class="t-ui text-[#f9fafb] bg-transparent border-0 cursor-pointer p-0"
+          >
+            <span class="link-relay">Close [ESC]</span>
+          </button>
+        </div>
+
+        <!-- PANEL A: Detalle del Certificado (Nombre, Mini Descripción y Botón Pantalla Completa) -->
+        <div id="lab-pane-cert" class="space-y-6">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#f9fafb] inline-block"></span>
+            <span id="lab-panel-meta" class="font-mono text-xs uppercase tracking-wider text-[#b5b3b3]">
+              AMAZON WEB SERVICES · 2026
+            </span>
+          </div>
+
+          <!-- Nombre del Certificado -->
+          <h2 id="lab-panel-title" class="text-2xl sm:text-3xl font-bold tracking-tight text-[#f9fafb] m-0 leading-tight">
+            AWS Cloud Practitioner Essentials
+          </h2>
+
+          <!-- Mini Descripción -->
+          <p id="lab-panel-desc" class="text-sm sm:text-base text-[#f9fafb]/90 leading-relaxed m-0">
+          </p>
+
+          <!-- Botón para ver el Certificado en Pantalla Completa + Descargar -->
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <button
+              id="btn-fullscreen-cert"
+              type="button"
+              class="t-ui inline-flex items-center gap-2.5 bg-[#f9fafb] text-[#141414] font-semibold border-0 px-5 py-2.5 cursor-pointer hover:bg-white transition-colors"
+            >
+              <span aria-hidden="true" class="inline-block w-2 h-2 rounded-full bg-[#141414]"></span>
+              <span>Ver en pantalla completa</span>
+            </button>
+
+            <a
+              id="lab-panel-download"
+              href="#"
+              download
+              class="t-ui inline-flex items-center gap-2 text-[#f9fafb] no-underline px-3 py-2 border border-[#4a4747] hover:border-[#f9fafb] transition-colors"
+            >
+              <span>Descargar original ↗</span>
+            </a>
+          </div>
+
+          <!-- Miniatura del Certificado dentro del Side-Drawer -->
+          <div class="pt-4 border-t border-[#4a4747]">
+            <span class="block font-mono text-xs uppercase tracking-wider text-[#b5b3b3] mb-3">
+              Vista previa (clic para ampliar)
+            </span>
+            <div id="lab-panel-img-wrapper" class="group relative cursor-zoom-in inline-block w-full">
+              <img
+                id="lab-panel-img"
+                src="/Certificados/AWS Cloud Practitioner Essentials.png"
+                alt="Certificate preview"
+                class="w-full max-h-[38vh] object-contain bg-[#141414] border border-[#4a4747] p-2 transition-transform duration-300 group-hover:scale-[1.01]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL B: Contacto (Idéntico al de index.astro para mantener consistencia total) -->
+        <div id="lab-pane-contact" class="space-y-6 hidden">
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f9fafb] m-0">Let's work together.</h2>
+          <p class="text-sm text-[#b5b3b3] leading-relaxed">
+            Disponible para oportunidades de desarrollo Full-Stack, pasantías de ingeniería de software y proyectos web a medida.
+          </p>
+
+          <div class="space-y-4 pt-4 border-t border-[#4a4747] text-sm">
+            <div class="flex flex-col">
+              <span class="text-xs font-mono text-[#b5b3b3] uppercase">Email</span>
+              <a href="mailto:nandomorancoronel@gmail.com" class="text-lg font-semibold text-[#f9fafb] no-underline link-sweep w-fit">
+                nandomorancoronel@gmail.com
+              </a>
+            </div>
+
+            <div class="flex flex-col">
+              <span class="text-xs font-mono text-[#b5b3b3] uppercase">Teléfono / WhatsApp</span>
+              <a href="tel:+593999746367" class="text-lg font-semibold text-[#f9fafb] no-underline link-sweep w-fit">
+                +593 99 974 6367
+              </a>
+            </div>
+
+            <div class="flex flex-col">
+              <span class="text-xs font-mono text-[#b5b3b3] uppercase">Perfiles y CV</span>
+              <div class="flex flex-wrap items-center gap-5 mt-1">
+                <a href="https://github.com/Nandofernando28" target="_blank" class="text-[#f9fafb] no-underline"><span class="link-relay">GitHub</span></a>
+                <a href="https://www.linkedin.com/in/fernando-mor%C3%A1n" target="_blank" class="text-[#f9fafb] no-underline"><span class="link-relay">LinkedIn</span></a>
+                <a href="/cv-fernando-moran.pdf" target="_blank" class="text-[#f9fafb] no-underline"><span class="link-relay">Descargar CV</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie del Side-Drawer (idéntico a index.astro) -->
+      <div class="pt-6 border-t border-[#4a4747] flex items-center justify-between text-xs font-mono text-[#b5b3b3] mt-8">
+        <span>N. — Guayaquil, EC</span>
+        <span>© 2026</span>
+      </div>
+    </aside>
+
+    <!-- 3.5 VISOR MODAL EN PANTALLA COMPLETA DEL CERTIFICADO -->
+    <div
+      id="cert-fullscreen-modal"
+      aria-hidden="true"
+      class="fixed inset-0 z-[60] bg-[#141414]/95 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-8"
+    >
+      <!-- Barra superior del visor pantalla completa -->
+      <div class="flex items-center justify-between text-[#f9fafb] shrink-0">
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#f9fafb]"></span>
+          <span id="fullscreen-cert-title" class="t-ui text-[#f9fafb]"></span>
+        </div>
+        <div class="flex items-center gap-6">
+          <a
+            id="fullscreen-open-pdf"
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            class="t-ui text-[#d1cfcf] hover:text-[#f9fafb] no-underline link-sweep"
+          >
+            Abrir archivo original ↗
+          </a>
+          <button
+            id="fullscreen-close-btn"
+            type="button"
+            class="t-ui text-[#141414] bg-[#f9fafb] hover:bg-white font-semibold border-0 px-4 py-1.5 cursor-pointer transition-colors"
+          >
+            Cerrar [ESC]
+          </button>
+        </div>
+      </div>
+
+      <!-- Imagen del certificado centrada a máxima escala -->
+      <div
+        id="fullscreen-backdrop-area"
+        class="flex-1 min-h-0 flex items-center justify-center py-4 overflow-auto cursor-zoom-out"
+      >
+        <img
+          id="fullscreen-cert-img"
+          src="/Certificados/AWS Cloud Practitioner Essentials.png"
+          alt="Certificado en pantalla completa"
+          class="max-h-full max-w-full object-contain shadow-2xl border border-white/15 cursor-default"
+        />
+      </div>
+
+      <!-- Pie del visor pantalla completa -->
+      <div class="flex items-center justify-between text-xs font-mono text-[#d1cfcf] shrink-0">
+        <span id="fullscreen-cert-issuer"></span>
+        <span>Presiona ESC o haz clic fuera para salir de pantalla completa</span>
+      </div>
+    </div>
+
+    <!-- 4. BARRA DE NAVEGACIÓN SUPERIOR (Idéntica a la ventana principal del portafolio, sin efecto glass) -->
+    <div class="pointer-events-none absolute inset-x-0 top-0 z-[4] border-b border-[var(--color-line)] bg-[var(--color-bg)]">
+      <div class="container-jmr ds-grid items-center py-vw-16">
+        <a
+          href="/"
+          aria-label="N. — Fernando Morán"
+          class="pointer-events-auto no-underline col-start-1 col-end-2 sm:col-end-4 inline-flex items-center w-fit text-[var(--color-ink)]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="12.5 16 41.25 36.25"
+            class="h-5 sm:h-[22px] w-auto block"
+            aria-hidden="true"
+          >
+            <polygon
+              points="12.5,16 21.5,16 34.5,38.32 34.5,16 41.5,16 41.5,52 32.5,52 19.5,29.68 19.5,52 12.5,52"
+              fill="#f9fafb"
+            />
+            <circle cx="49" cy="47.5" r="4.75" fill="#C4452F" />
+          </svg>
+        </a>
+
+        <nav class="col-start-2 col-end-4 sm:col-[4/10] nav-main-cell flex items-center gap-vw-15 justify-center sm:justify-start">
+          <a href="/" class="t-ui pointer-events-auto no-underline text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
+            Work
+          </a>
+          <a href="/#about" class="t-ui pointer-events-auto no-underline text-[var(--color-muted)] hover:text-[var(--color-ink)] link-sweep">
+            About
+          </a>
+          <a href="/lab" class="t-ui pointer-events-auto no-underline text-[var(--color-ink)] link-sweep">
+            Certificates · Lab
+          </a>
+        </nav>
+
+        <div class="col-start-4 sm:col-[12/13] justify-self-end whitespace-nowrap">
+          <button
+            id="lab-contact-btn"
+            type="button"
+            class="t-ui pointer-events-auto p-0 border-0 bg-transparent text-[var(--color-ink)] cursor-pointer"
+          >
+            <span class="link-relay">Contact</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MOTOR WEBGL DEL LIENZO INFINITO + SHADERS GLSL EXACTOS (mod_78896)
+       ===================================================== -->
+  <script define:vars={{ labCertificates, cluster }}>
+    // 1. Inicializar LinkRelays
+    if (window.matchMedia('(hover: hover)').matches) {
+      document.querySelectorAll('.link-relay').forEach((span) => {
+        const parent = span.parentElement || span;
+        parent.addEventListener('pointerenter', () => {
+          if (!('relay' in span.dataset)) span.dataset.relay = '';
+        });
+        span.addEventListener('animationend', (e) => {
+          if (e.animationName === 'relay-enter') delete span.dataset.relay;
+        });
+      });
+    }
+
+    // 2. Utilidades matemáticas exactas (mod_11715, mod_12674, mod_78896)
+    const modWrap = (val, size) => (size <= 0 ? 0 : ((val % size) + size) % size);
+    const decayVelocity = (vel, dt, friction) => vel * Math.pow(friction, 60 * dt);
+    const clampVel = (v) => Math.max(-4000, Math.min(4000, v));
+    const clampNorm = (v) => Math.max(-1, Math.min(1, v));
+    const clampSym = (v, m) => Math.min(Math.max(v, -m), m);
+
+    function depositSplit(cur, dx, dy, gain, max) {
+      return {
+        x: clampSym(cur.x + dx * gain, max),
+        y: clampSym(cur.y + dy * gain, max)
+      };
+    }
+
+    function drainSplit(cur, dt, friction, eps) {
+      const nx = decayVelocity(cur.x, dt, friction);
+      const ny = decayVelocity(cur.y, dt, friction);
+      return Math.abs(nx) < eps && Math.abs(ny) < eps ? { x: 0, y: 0 } : { x: nx, y: ny };
+    }
+
+    // 3. Shaders GLSL Exactos de mod_78896 (juanmoraromero.com/lab)
+    const VERTEX_SHADER = `
+      #define PI 3.1415926535897932384626433832795
+
+      attribute vec3 position;
+      attribute vec2 uv;
+      uniform mat4 uModelMatrix;
+      uniform mat4 uProjectionMatrix;
+      uniform vec2 uStrength;
+      uniform float uBend;
+      uniform vec2 uViewportSizes;
+
+      varying vec2 vUv;
+
+      void main() {
+        vec4 mv = uModelMatrix * vec4(position, 1.0);
+        float wx = sin(mv.x / uViewportSizes.x * PI + PI / 2.0);
+        float wy = sin(mv.y / uViewportSizes.y * PI + PI / 2.0);
+        mv.z += (wx * -uStrength.x + wy * -uStrength.y) * uBend;
+        vUv = uv;
+        gl_Position = uProjectionMatrix * mv;
+      }
+    `;
+
+    const FRAGMENT_SHADER = `
+      precision highp float;
+
+      uniform vec2 uImageSizes;
+      uniform vec2 uPlaneSizes;
+      uniform sampler2D uTexture;
+      uniform vec3 uColor;
+      uniform float uHasTexture;
+      uniform float uOpacity;
+      uniform vec2 uStrength;
+      uniform vec2 uHover;
+
+      varying vec2 vUv;
+
+      #define ABERR_THRESHOLD 0.006
+      #define ABERR_SCALE 0.42
+
+      void main() {
+        if (uHasTexture < 0.5) {
+          gl_FragColor = vec4(uColor, uOpacity);
+          return;
+        }
+
+        vec2 ratio = vec2(
+          min((uPlaneSizes.x / uPlaneSizes.y) / (uImageSizes.x / uImageSizes.y), 1.0),
+          min((uPlaneSizes.y / uPlaneSizes.x) / (uImageSizes.y / uImageSizes.x), 1.0)
+        );
+
+        vec2 uv = vec2(
+          vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+          vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+        );
+
+        vec2 excess = max(abs(uStrength) - vec2(ABERR_THRESHOLD), 0.0);
+        vec2 aspect = uPlaneSizes / min(uPlaneSizes.x, uPlaneSizes.y);
+        vec2 off = excess * sign(uStrength) * ABERR_SCALE + uHover / aspect;
+
+        float r = texture2D(uTexture, clamp(uv + off, 0.0, 1.0)).r;
+        float g = texture2D(uTexture, clamp(uv, 0.0, 1.0)).g;
+        float b = texture2D(uTexture, clamp(uv - off, 0.0, 1.0)).b;
+
+        gl_FragColor = vec4(r, g, b, uOpacity);
+      }
+    `;
+
+    // 4. Inicializar WebGL Contexto ligero (idéntico al pipeline OGL de mod_78896)
+    const rootEl = document.getElementById('lab-field-root');
+    const canvasEl = document.getElementById('lab-webgl-canvas');
+    const hitLayerEl = document.getElementById('lab-hit-layer');
+
+    // HoverPill refs
+    const pillMaskEl = document.getElementById('lab-pill-mask');
+    const pillBoxEl = document.getElementById('lab-pill-box');
+    const pillBgEl = document.getElementById('lab-pill-bg');
+    const pillMarqueeEl = document.getElementById('lab-pill-marquee');
+    const pillTextSpans = Array.from(document.querySelectorAll('.lab-pill-text'));
+
+    const gl = canvasEl.getContext('webgl', { alpha: true, antialias: true });
+
+    function compileShader(type, source) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, source);
+      gl.compileShader(s);
+      return s;
+    }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compileShader(gl.VERTEX_SHADER, VERTEX_SHADER));
+    gl.attachShader(prog, compileShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    // Malla subdividida 20x20 (idéntica a new Plane(gl, {widthSegments: 20, heightSegments: 20}))
+    function buildSubdividedPlane(segX = 20, segY = 20) {
+      const positions = [];
+      const uvs = [];
+      const indices = [];
+      for (let iy = 0; iy <= segY; iy++) {
+        const y = iy / segY - 0.5;
+        for (let ix = 0; ix <= segX; ix++) {
+          const x = ix / segX - 0.5;
+          positions.push(x, -y, 0);
+          uvs.push(ix / segX, iy / segY);
+          if (iy < segY && ix < segX) {
+            const a = ix + iy * (segX + 1);
+            const b = ix + (iy + 1) * (segX + 1);
+            const c = ix + (iy + 1) * (segX + 1) + 1;
+            const d = ix + iy * (segX + 1) + 1;
+            indices.push(a, b, d, b, c, d);
+          }
+        }
+      }
+      return {
+        positions: new Float32Array(positions),
+        uvs: new Float32Array(uvs),
+        indices: new Uint16Array(indices)
+      };
+    }
+
+    const planeGeo = buildSubdividedPlane(20, 20);
+
+    const posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, planeGeo.positions, gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, 'position');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+
+    const uvBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, planeGeo.uvs, gl.STATIC_DRAW);
+    const aUv = gl.getAttribLocation(prog, 'uv');
+    gl.enableVertexAttribArray(aUv);
+    gl.vertexAttribPointer(aUv, 2, gl.FLOAT, false, 0, 0);
+
+    const idxBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, planeGeo.indices, gl.STATIC_DRAW);
+
+    // Uniform locations
+    const uModelMatrix = gl.getUniformLocation(prog, 'uModelMatrix');
+    const uProjectionMatrix = gl.getUniformLocation(prog, 'uProjectionMatrix');
+    const uStrength = gl.getUniformLocation(prog, 'uStrength');
+    const uBend = gl.getUniformLocation(prog, 'uBend');
+    const uViewportSizes = gl.getUniformLocation(prog, 'uViewportSizes');
+    const uImageSizes = gl.getUniformLocation(prog, 'uImageSizes');
+    const uPlaneSizes = gl.getUniformLocation(prog, 'uPlaneSizes');
+    const uColor = gl.getUniformLocation(prog, 'uColor');
+    const uHasTexture = gl.getUniformLocation(prog, 'uHasTexture');
+    const uOpacity = gl.getUniformLocation(prog, 'uOpacity');
+    const uHover = gl.getUniformLocation(prog, 'uHover');
+    const uTexture = gl.getUniformLocation(prog, 'uTexture');
+
+    // Cargar las 12 imágenes PNG reales de los certificados como texturas WebGL (idéntico a mod_78896)
+    let pendingLoads = 0;
+    let introStarted = false;
+
+    function startIntroIfReady() {
+      if (introStarted) return;
+      if (!window.__portfolioLoaderDone) {
+        window.addEventListener('portfolio:loader-done', () => startIntroIfReady(), { once: true });
+        return;
+      }
+      introStarted = true;
+      ensureLabLoop();
+    }
+
+    const pieceMaterials = labCertificates.map((cert) => {
+      const tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      // 1x1 pixel placeholder mientras decodifica el PNG
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        1,
+        1,
+        0,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        new Uint8Array([20, 20, 20, 255])
+      );
+
+      const mat = {
+        cert,
+        tex,
+        hasTexture: 0,
+        imgW: cert.rect.w,
+        imgH: cert.rect.h
+      };
+
+      pendingLoads++;
+      const img = new Image();
+      img.onload = () => {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        mat.imgW = img.naturalWidth || cert.rect.w;
+        mat.imgH = img.naturalHeight || cert.rect.h;
+        mat.hasTexture = 1;
+        if (--pendingLoads === 0) startIntroIfReady();
+        renderLabScene();
+      };
+      img.onerror = () => {
+        if (--pendingLoads === 0) startIntroIfReady();
+      };
+      // encodeURI asegura que espacios o caracteres especiales carguen sin fallo
+      img.src = encodeURI(cert.image);
+
+      return mat;
+    });
+
+    // Timeout de respaldo de 1.5s igual que en mod_78896
+    setTimeout(startIntroIfReady, 1500);
+
+    // Matrices de cámara en perspectiva (z = 1200, idéntica a mod_78896)
+    const CAM_Z = 1200;
+    let projMat = new Float32Array(16);
+
+    function makePerspective(fovRad, aspect, near, far) {
+      const f = 1.0 / Math.tan(fovRad / 2);
+      const nf = 1 / (near - far);
+      const out = new Float32Array(16);
+      out[0] = f / aspect;
+      out[5] = f;
+      out[10] = (far + near) * nf;
+      out[11] = -1;
+      out[14] = 2 * far * near * nf;
+      return out;
+    }
+
+    function makeModelMatrix(x, y, z, sx, sy) {
+      const out = new Float32Array(16);
+      out[0] = sx;
+      out[5] = sy;
+      out[10] = 1;
+      out[12] = x;
+      out[13] = y;
+      out[14] = z;
+      out[15] = 1;
+      return out;
+    }
+
+    // Estado del motor infinito (R, z, B, V de mod_78896)
+    let viewW = window.innerWidth;
+    let viewH = window.innerHeight;
+    let scaleT = Math.max(viewW, 900) / 1728;
+    let camStateR = { x: 0, y: 0, vx: 0, vy: 0 };
+    let modeN = 'idle'; // 'idle' | 'drag' | 'momentum'
+    let accumDx = 0;
+    let accumDy = 0;
+    let strengthZ = { x: 0, y: 0 };
+    let hoverSplitB = labCertificates.map(() => ({ x: 0, y: 0 }));
+    let introV = 0; // 0 -> 1 en 1.4s
+    let isLocked = false;
+
+    const hitLinks = [];
+    let visibleTiles = [];
+    let hoveredSlot = -1;
+    let hoveredPieceIdx = -1;
+    let pointerPos = { x: 0, y: 0 };
+
+    function updateLabHoverPill() {
+      if (!pillMaskEl || !pillBoxEl || !pillBgEl || !pillMarqueeEl) return;
+      if (hoveredSlot < 0 || !visibleTiles[hoveredSlot] || isLocked) {
+        pillBgEl.style.transform = 'scale(0)';
+        pillMarqueeEl.style.opacity = '0';
+        return;
+      }
+      const tile = visibleTiles[hoveredSlot];
+      pillMaskEl.style.transform = `translate3d(${tile.left.toFixed(1)}px, ${tile.top.toFixed(1)}px, 0)`;
+      pillMaskEl.style.width = `${tile.width.toFixed(1)}px`;
+      pillMaskEl.style.height = `${tile.height.toFixed(1)}px`;
+
+      const localX = pointerPos.x - tile.left;
+      const localY = pointerPos.y - tile.top;
+      pillBoxEl.style.transform = `translate3d(${localX.toFixed(1)}px, ${localY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      pillBgEl.style.transform = 'scale(1)';
+      pillMarqueeEl.style.opacity = '1';
+    }
+
+    function renderLabScene() {
+      if (viewW <= 0 || viewH <= 0) return;
+
+      const alpha = 1 - Math.pow(1 - introV, 3);
+      const camPos = {
+        x: camStateR.x,
+        y: camStateR.y - 340 * (1 - alpha)
+      };
+      const sx = strengthZ.x;
+      const sy = strengthZ.y + 1.8 * (1 - alpha);
+
+      // Calcular qué repeticiones del cluster intersectan el viewport actual
+      const invW = viewW / scaleT;
+      const invH = viewH / scaleT;
+      const nextTiles = [];
+
+      labCertificates.forEach((cert, idx) => {
+        const r = cert.rect;
+        const minTx = Math.ceil((camPos.x - r.x - r.w) / cluster.w);
+        const maxTx = Math.floor((camPos.x + invW - r.x) / cluster.w);
+        const minTy = Math.ceil((camPos.y - r.y - r.h) / cluster.h);
+        const maxTy = Math.floor((camPos.y + invH - r.y) / cluster.h);
+
+        for (let tx = minTx; tx <= maxTx; tx++) {
+          for (let ty = minTy; ty <= maxTy; ty++) {
+            nextTiles.push({
+              index: idx,
+              left: (r.x + tx * cluster.w - camPos.x) * scaleT,
+              top: (r.y + ty * cluster.h - camPos.y) * scaleT,
+              width: r.w * scaleT,
+              height: r.h * scaleT
+            });
+          }
+        }
+      });
+
+      visibleTiles = nextTiles;
+
+      // Renderizar WebGL
+      gl.viewport(0, 0, canvasEl.width, canvasEl.height);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+      gl.uniformMatrix4fv(uProjectionMatrix, false, projMat);
+      gl.uniform2f(uViewportSizes, viewW, viewH);
+      gl.uniform1f(uBend, 0.85 * viewH);
+      gl.uniform2f(uStrength, sx, sy);
+      gl.uniform1f(uOpacity, alpha);
+      // PLANE_COLOR = #141414 (20/255 = 0.0784)
+      gl.uniform3f(uColor, 0.0784, 0.0784, 0.0784);
+
+      for (let i = 0; i < visibleTiles.length; i++) {
+        const tile = visibleTiles[i];
+        const mat = pieceMaterials[tile.index];
+        const hSplit = hoverSplitB[tile.index];
+
+        const worldX = tile.left + tile.width / 2 - viewW / 2;
+        const worldY = viewH / 2 - (tile.top + tile.height / 2);
+        const modelMat = makeModelMatrix(worldX, worldY, -CAM_Z, tile.width, tile.height);
+
+        gl.uniformMatrix4fv(uModelMatrix, false, modelMat);
+        gl.uniform2f(uImageSizes, mat.imgW, mat.imgH);
+        gl.uniform2f(uPlaneSizes, mat.cert.rect.w, mat.cert.rect.h);
+        gl.uniform1f(uHasTexture, mat.hasTexture);
+        gl.uniform2f(uHover, hSplit.x, hSplit.y);
+
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, mat.tex);
+        gl.uniform1i(uTexture, 0);
+
+        gl.drawElements(gl.TRIANGLES, planeGeo.indices.length, gl.UNSIGNED_SHORT, 0);
+      }
+
+      // Sincronizar los enlaces DOM invisibles sobre cada certificado visible
+      while (hitLinks.length < visibleTiles.length) {
+        const a = document.createElement('a');
+        a.dataset.slot = String(hitLinks.length);
+        a.className = 'no-underline';
+        a.draggable = false;
+        a.style.cssText =
+          'position:absolute;top:0;left:0;width:0;height:0;transform-origin:top left;will-change:transform;cursor:pointer;-webkit-user-drag:none;';
+        hitLayerEl.appendChild(a);
+        hitLinks.push(a);
+      }
+
+      for (let i = 0; i < hitLinks.length; i++) {
+        const a = hitLinks[i];
+        if (i >= visibleTiles.length) {
+          a.style.display = 'none';
+          continue;
+        }
+        const tile = visibleTiles[i];
+        const cert = labCertificates[tile.index];
+        a.style.display = 'block';
+        a.style.transform = `translate3d(${tile.left.toFixed(1)}px, ${tile.top.toFixed(1)}px, 0)`;
+        a.style.width = `${tile.width.toFixed(1)}px`;
+        a.style.height = `${tile.height.toFixed(1)}px`;
+        if (a.dataset.index !== String(tile.index)) {
+          a.dataset.index = String(tile.index);
+          a.href = `#${cert.slug}`;
+          a.setAttribute('aria-label', `${cert.fullTitle} — open credential`);
+        }
+      }
+
+      updateLabHoverPill();
+    }
+
+    let labRaf = null;
+    let lastTime = performance.now();
+
+    function stepLab(now) {
+      const dt = Math.min((now - lastTime) / 1000, 1 / 30);
+      lastTime = now;
+
+      if (modeN === 'momentum') {
+        const nextX = camStateR.x + camStateR.vx * dt;
+        const nextY = camStateR.y + camStateR.vy * dt;
+        accumDx += nextX - camStateR.x;
+        accumDy += nextY - camStateR.y;
+        camStateR.x = modWrap(nextX, cluster.w);
+        camStateR.y = modWrap(nextY, cluster.h);
+        camStateR.vx = decayVelocity(camStateR.vx, dt, 0.92);
+        camStateR.vy = decayVelocity(camStateR.vy, dt, 0.92);
+        if (Math.hypot(camStateR.vx, camStateR.vy) < 8) {
+          camStateR.vx = 0;
+          camStateR.vy = 0;
+          modeN = 'idle';
+        }
+      } else if (modeN === 'drag') {
+        camStateR.vx = decayVelocity(camStateR.vx, dt, 0.8);
+        camStateR.vy = decayVelocity(camStateR.vy, dt, 0.8);
+      }
+
+      const mult = modeN === 'drag' ? 12.5 : 1;
+      const targetSx = clampNorm(((accumDx * scaleT) / viewW) * mult);
+      const targetSy = clampNorm(((accumDy * scaleT) / viewH) * mult);
+      accumDx = 0;
+      accumDy = 0;
+      strengthZ.x += (targetSx - strengthZ.x) * 0.15;
+      strengthZ.y += (targetSy - strengthZ.y) * 0.15;
+
+      let hasHoverSplit = false;
+      hoverSplitB = hoverSplitB.map((sp) => {
+        const next = drainSplit(sp, dt, 0.86, 0.0003);
+        if (next.x !== 0 || next.y !== 0) hasHoverSplit = true;
+        return next;
+      });
+
+      if (introStarted && introV < 1) {
+        introV = Math.min(1, introV + dt / 1.4);
+      }
+
+      renderLabScene();
+
+      const strengthSettled = Math.abs(strengthZ.x) < 0.002 && Math.abs(strengthZ.y) < 0.002;
+      if (modeN === 'idle' && strengthSettled && !hasHoverSplit && (introV >= 1 || !introStarted)) {
+        strengthZ.x = 0;
+        strengthZ.y = 0;
+        labRaf = null;
+        return;
+      }
+
+      labRaf = requestAnimationFrame(stepLab);
+    }
+
+    function ensureLabLoop() {
+      if (labRaf === null) {
+        lastTime = performance.now();
+        labRaf = requestAnimationFrame(stepLab);
+      }
+    }
+
+    function resizeLab() {
+      const rect = rootEl.getBoundingClientRect();
+      viewW = rect.width;
+      viewH = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvasEl.width = viewW * dpr;
+      canvasEl.height = viewH * dpr;
+      scaleT = Math.max(viewW, 900) / 1728;
+
+      const fovRad = 2 * Math.atan(viewH / 2 / CAM_Z);
+      projMat = makePerspective(fovRad, viewW / viewH, 100, 2400);
+      renderLabScene();
+    }
+
+    resizeLab();
+    window.addEventListener('resize', resizeLab);
+
+    // 5. Interacción de Wheel (360° Panning) y Drag con Inercia (mod_78896)
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        if (isLocked) return;
+        e.preventDefault();
+        if (modeN === 'drag' || introV < 1) return;
+        camStateR.vx = clampVel(camStateR.vx + (e.deltaX / scaleT) * 5);
+        camStateR.vy = clampVel(camStateR.vy + (e.deltaY / scaleT) * 5);
+        modeN = 'momentum';
+        ensureLabLoop();
+      },
+      { passive: false }
+    );
+
+    let lastHoverPos = null;
+    hitLayerEl.addEventListener('pointerover', (e) => {
+      const a = e.target.closest('a');
+      if (a && a.dataset.index !== undefined) {
+        hoveredSlot = Number(a.dataset.slot);
+        hoveredPieceIdx = Number(a.dataset.index);
+        const title = labCertificates[hoveredPieceIdx]?.title ?? 'Certificate';
+        pillTextSpans.forEach((s) => (s.textContent = title));
+        updateLabHoverPill();
+      }
+    });
+
+    hitLayerEl.addEventListener('pointerout', (e) => {
+      const rel = e.relatedTarget;
+      if (!(rel && hitLayerEl.contains(rel) && rel.closest('a'))) {
+        hoveredSlot = -1;
+        hoveredPieceIdx = -1;
+        updateLabHoverPill();
+      }
+    });
+
+    rootEl.addEventListener('pointermove', (e) => {
+      pointerPos = { x: e.clientX, y: e.clientY };
+      if (hoveredPieceIdx >= 0 && lastHoverPos && introV >= 1) {
+        hoverSplitB[hoveredPieceIdx] = depositSplit(
+          hoverSplitB[hoveredPieceIdx],
+          e.clientX - lastHoverPos.x,
+          -(e.clientY - lastHoverPos.y),
+          0.00015,
+          0.03
+        );
+        ensureLabLoop();
+      }
+      lastHoverPos = { x: e.clientX, y: e.clientY };
+      updateLabHoverPill();
+    });
+
+    let pointerActive = false;
+    let isDragging = false;
+    let downX = 0;
+    let downY = 0;
+    let prevX = 0;
+    let prevY = 0;
+    let dragStamp = 0;
+
+    rootEl.addEventListener('pointerdown', (e) => {
+      if (!e.isPrimary || pointerActive || isDragging || isLocked || introV < 1) return;
+      pointerActive = true;
+      downX = prevX = e.clientX;
+      downY = prevY = e.clientY;
+    });
+
+    rootEl.addEventListener('pointermove', (e) => {
+      if (!e.isPrimary || !pointerActive) return;
+      if (!isDragging && Math.hypot(e.clientX - downX, e.clientY - downY) >= 6) {
+        isDragging = true;
+        rootEl.setPointerCapture(e.pointerId);
+        rootEl.style.cursor = 'grabbing';
+        hitLayerEl.style.pointerEvents = 'none';
+        hoveredSlot = -1;
+        hoveredPieceIdx = -1;
+        updateLabHoverPill();
+        camStateR.vx = 0;
+        camStateR.vy = 0;
+        dragStamp = performance.now();
+        modeN = 'drag';
+        ensureLabLoop();
+      }
+      if (isDragging && modeN === 'drag') {
+        const dx = e.clientX - prevX;
+        const dy = e.clientY - prevY;
+        const stepX = -dx / scaleT;
+        const stepY = -dy / scaleT;
+        camStateR.x = modWrap(camStateR.x + stepX, cluster.w);
+        camStateR.y = modWrap(camStateR.y + stepY, cluster.h);
+        accumDx += stepX;
+        accumDy += stepY;
+
+        const now = performance.now();
+        const dt = Math.min(Math.max((now - dragStamp) / 1000, 1 / 240), 1 / 30);
+        dragStamp = now;
+        camStateR.vx += (clampVel(stepX / dt) - camStateR.vx) * 0.25;
+        camStateR.vy += (clampVel(stepY / dt) - camStateR.vy) * 0.25;
+      }
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+
+    function finishLabDrag(e) {
+      if (!e.isPrimary) return;
+      if (isDragging) {
+        rootEl.style.cursor = 'grab';
+        hitLayerEl.style.pointerEvents = '';
+        modeN = Math.hypot(camStateR.vx, camStateR.vy) < 8 ? 'idle' : 'momentum';
+      } else if (pointerActive && !isLocked && e.button === 0) {
+        // Hit-test directo sobre las piezas visibles si fue un clic limpio (< 6px de movimiento)
+        const rect = rootEl.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        for (let i = visibleTiles.length - 1; i >= 0; i--) {
+          const t = visibleTiles[i];
+          if (x >= t.left && x <= t.left + t.width && y >= t.top && y <= t.top + t.height) {
+            openLabPiece(t.index);
+            break;
+          }
+        }
+      }
+      pointerActive = false;
+      isDragging = false;
+    }
+
+    rootEl.addEventListener('pointerup', finishLabDrag);
+    rootEl.addEventListener('pointercancel', finishLabDrag);
+    rootEl.addEventListener('dragstart', (e) => e.preventDefault());
+
+    // 6. Apertura y Cierre del Side-Drawer + Visor en Pantalla Completa
+    const panelEl = document.getElementById('lab-panel');
+    const scrimEl = document.getElementById('lab-scrim');
+    const closeBtn = document.getElementById('lab-panel-close');
+    const eyebrowEl = document.getElementById('lab-drawer-eyebrow');
+    const paneCert = document.getElementById('lab-pane-cert');
+    const paneContact = document.getElementById('lab-pane-contact');
+    const contactBtn = document.getElementById('lab-contact-btn');
+    const metaEl = document.getElementById('lab-panel-meta');
+    const titleEl = document.getElementById('lab-panel-title');
+    const descEl = document.getElementById('lab-panel-desc');
+    const downloadLink = document.getElementById('lab-panel-download');
+    const panelImg = document.getElementById('lab-panel-img');
+    const panelImgWrapper = document.getElementById('lab-panel-img-wrapper');
+    const fullscreenBtn = document.getElementById('btn-fullscreen-cert');
+
+    // Referencias del Modal Pantalla Completa
+    const fullscreenModal = document.getElementById('cert-fullscreen-modal');
+    const fullscreenImg = document.getElementById('fullscreen-cert-img');
+    const fullscreenTitle = document.getElementById('fullscreen-cert-title');
+    const fullscreenIssuer = document.getElementById('fullscreen-cert-issuer');
+    const fullscreenOpenPdf = document.getElementById('fullscreen-open-pdf');
+    const fullscreenCloseBtn = document.getElementById('fullscreen-close-btn');
+    const fullscreenBackdropArea = document.getElementById('fullscreen-backdrop-area');
+
+    let activeCertIndex = -1;
+    let isFullscreenOpen = false;
+
+    function openLabPiece(idx) {
+      const cert = labCertificates[idx];
+      if (!cert) return;
+      activeCertIndex = idx;
+      isLocked = true;
+      hoveredSlot = -1;
+      hoveredPieceIdx = -1;
+      updateLabHoverPill();
+
+      paneCert?.classList.remove('hidden');
+      paneContact?.classList.add('hidden');
+      if (eyebrowEl) eyebrowEl.textContent = `CREDENTIAL // ${String(idx + 1).padStart(2, '0')}`;
+
+      if (metaEl) metaEl.textContent = `${cert.issuer.toUpperCase()} · ${cert.year}`;
+      if (titleEl) titleEl.textContent = cert.fullTitle;
+      if (descEl) descEl.textContent = cert.description;
+      if (downloadLink) downloadLink.href = encodeURI(cert.file);
+      if (panelImg) {
+        panelImg.src = encodeURI(cert.image);
+        panelImg.alt = cert.fullTitle;
+      }
+
+      // Preparar también los datos del visor en pantalla completa
+      if (fullscreenImg) {
+        fullscreenImg.src = encodeURI(cert.image);
+        fullscreenImg.alt = cert.fullTitle;
+      }
+      if (fullscreenTitle) fullscreenTitle.textContent = cert.fullTitle;
+      if (fullscreenIssuer) fullscreenIssuer.textContent = `${cert.issuer} — ${cert.year}`;
+      if (fullscreenOpenPdf) fullscreenOpenPdf.href = encodeURI(cert.file);
+
+      scrimEl?.classList.remove('opacity-0', 'pointer-events-none');
+      panelEl?.classList.remove('translate-x-full');
+      panelEl?.setAttribute('aria-hidden', 'false');
+    }
+
+    function openLabContact() {
+      isLocked = true;
+      hoveredSlot = -1;
+      hoveredPieceIdx = -1;
+      updateLabHoverPill();
+
+      paneCert?.classList.add('hidden');
+      paneContact?.classList.remove('hidden');
+      if (eyebrowEl) eyebrowEl.textContent = '03 // CONTACT';
+
+      scrimEl?.classList.remove('opacity-0', 'pointer-events-none');
+      panelEl?.classList.remove('translate-x-full');
+      panelEl?.setAttribute('aria-hidden', 'false');
+    }
+
+    contactBtn?.addEventListener('click', openLabContact);
+
+    function openFullscreenCert() {
+      if (activeCertIndex < 0) return;
+      isFullscreenOpen = true;
+      fullscreenModal?.classList.remove('opacity-0', 'pointer-events-none');
+      fullscreenModal?.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeFullscreenCert() {
+      if (!isFullscreenOpen) return;
+      isFullscreenOpen = false;
+      fullscreenModal?.classList.add('opacity-0', 'pointer-events-none');
+      fullscreenModal?.setAttribute('aria-hidden', 'true');
+      if (document.fullscreenElement) {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    }
+
+    function closeLabPiece() {
+      if (isFullscreenOpen) {
+        closeFullscreenCert();
+      }
+      if (!isLocked) return;
+      isLocked = false;
+      scrimEl?.classList.add('opacity-0', 'pointer-events-none');
+      panelEl?.classList.add('translate-x-full');
+      panelEl?.setAttribute('aria-hidden', 'true');
+    }
+
+    hitLayerEl.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a || a.dataset.index === undefined || e.button !== 0) return;
+      e.preventDefault();
+      openLabPiece(Number(a.dataset.index));
+    });
+
+    fullscreenBtn?.addEventListener('click', openFullscreenCert);
+    panelImgWrapper?.addEventListener('click', openFullscreenCert);
+    fullscreenCloseBtn?.addEventListener('click', closeFullscreenCert);
+    fullscreenBackdropArea?.addEventListener('click', (e) => {
+      if (e.target === fullscreenBackdropArea) closeFullscreenCert();
+    });
+
+    closeBtn?.addEventListener('click', closeLabPiece);
+    scrimEl?.addEventListener('click', closeLabPiece);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (isFullscreenOpen) {
+          closeFullscreenCert();
+        } else {
+          closeLabPiece();
+        }
+      }
+    });
+  </script>
+</Layout>

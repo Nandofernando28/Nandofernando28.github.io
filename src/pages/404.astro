@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="404 — Route Not Found | Fernando Morán"
+  description="La ruta solicitada no existe dentro del archivo de Fernando Morán."
+>
+  <main class="min-h-svh flex flex-col justify-between bg-[var(--color-bg)] text-[var(--color-ink)] select-none">
+    <!-- Barra Superior Suiza -->
+    <header class="border-b border-[var(--color-line)] py-nav">
+      <div class="swiss-grid items-center">
+        <div class="col-span-2 lg:col-span-3">
+          <a
+            href="/"
+            aria-label="Inicio — Fernando Morán"
+            class="inline-flex items-center no-underline hover:opacity-80 transition-opacity"
+          >
+            <img
+              src="/brand/mark-transparent-dark-bg.svg"
+              alt="N."
+              width="28"
+              height="28"
+              class="h-7 w-7 block"
+            />
+          </a>
+        </div>
+
+        <div class="col-span-2 lg:col-span-6 font-mono text-xs uppercase tracking-widest text-[var(--color-muted)]">
+          STATUS // 404 NOT FOUND
+        </div>
+
+        <div class="col-span-2 lg:col-span-3 flex justify-end">
+          <a href="/" class="t-ui text-[var(--color-ink)] no-underline">
+            <span class="link-relay">Return Home ↗</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Cuerpo Central Arquitectónico -->
+    <section class="flex-1 flex items-center py-16">
+      <div class="swiss-grid w-full items-end gap-y-10">
+        <div class="col-span-full lg:col-span-4 border-l border-[var(--color-line)] pl-6 space-y-3">
+          <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[var(--color-muted)]">
+            <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] inline-block"></span>
+            <span>ERROR // 0x404</span>
+          </div>
+          <p class="text-sm text-[var(--color-muted)] leading-relaxed m-0 max-w-[34ch]">
+            La coordenada solicitada no existe o fue reubicada dentro del portafolio.
+          </p>
+        </div>
+
+        <div class="col-span-full lg:col-span-8 space-y-8">
+          <h1 class="t-display text-[var(--color-ink)] m-0 leading-none tracking-tight">
+            404<span class="text-[var(--color-accent)]">.</span>
+          </h1>
+          <p class="t-statement text-[var(--color-ink)] m-0 max-w-[28ch]">
+            Route not found in the current workspace.
+          </p>
+          <div class="flex flex-wrap items-center gap-8 pt-2">
+            <a
+              href="/"
+              class="t-ui inline-flex items-center gap-2.5 text-[var(--color-ink)] no-underline"
+            >
+              <span class="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] inline-block"></span>
+              <span class="link-relay">Ir al Portafolio Principal (/)</span>
+            </a>
+            <a
+              href="/lab"
+              class="t-ui text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors no-underline"
+            >
+              <span class="link-relay">Explorar Certificados (/lab) ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pie de Cuadrícula -->
+    <footer class="border-t border-[var(--color-line)] py-nav">
+      <div class="swiss-grid items-center text-xs font-mono text-[var(--color-muted)]">
+        <div class="col-span-3 lg:col-span-6">N. — Fernando Morán</div>
+        <div class="col-span-3 lg:col-span-6 text-right">GUAYAQUIL, EC // © 2026</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.link-relay').forEach((el) => {
+      const trigger = el.closest('a, button') || el;
+      trigger.addEventListener('pointerenter', () => {
+        el.removeAttribute('data-relay');
+        void (el as HTMLElement).offsetWidth;
+        el.setAttribute('data-relay', '');
+      });
+    });
+  </script>
+</Layout>

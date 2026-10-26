@@ -1,0 +1,479 @@
+@import "tailwindcss";
+
+@theme {
+  --color-jmr-bg: #343131;
+  --color-jmr-ink: #f9fafb;
+  --color-jmr-muted: #979595;
+  --color-jmr-line: #4a4747;
+  
+  --font-display: "neue-haas-grotesk-display", 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+}
+
+:root {
+  /* =========================================
+     PALETA DE COLORES EDITORIAL SUIZA (JMR)
+     Fondo: Carbón Cálido (#343131)
+     Texto: Blanco Tiza (#f9fafb)
+     ========================================= */
+  --color-bg: #343131;
+  --color-ink: #f9fafb;
+  --color-muted: #979595;
+  --color-line: #4a4747;
+
+  /* Superficie de /lab unificada con la paleta principal del portafolio (#343131) */
+  --lab-shell-bg: var(--color-bg);
+  --lab-plane-color: #141414;
+
+  /* Acentos de Proyectos Extraídos */
+  --project-c1: #C4452F; /* Terracota */
+  --project-c2: #2F7D4F; /* Verde Bosque */
+  --project-c3: #C98A2B; /* Mostaza Cálida */
+  --project-c4: #3A52A8; /* Azul Cobalto */
+  --project-c5: #1F8A93; /* Cian Petróleo */
+
+  /* =========================================
+     SISTEMA PROPORCIONAL DE VIEWPORT (1728px Base)
+     ========================================= */
+  --d: 1728;
+  --t: 768;
+  --m: 390;
+  --vw: calc(100vw / var(--d));
+  --vf: 1px;
+  --vr: 0.05787vw;
+
+  --header-height: calc(var(--vw) * 50);
+  --col-l: 12;
+
+  /* Espaciado maestro simétrico para bordes y líneas divisorias (12px exactos) */
+  --marge-x: clamp(1rem, calc(var(--vw) * 24), 2rem);
+  --gutter: 12px;
+  --grid-pad: 12px;
+
+  --area: calc(100vw - var(--marge-x) * 2);
+  --col: calc((var(--area) - var(--gutter) * (var(--col-l) - 1)) / var(--col-l));
+
+  /* Escalas de Espaciado Proporcional */
+  --spacing-vw-2: calc(var(--vw) * 2);
+  --spacing-vw-3: calc(var(--vw) * 3);
+  --spacing-vw-5: calc(var(--vw) * 5);
+  --spacing-vw-6: calc(var(--vw) * 6);
+  --spacing-vw-8: calc(var(--vw) * 8);
+  --spacing-vw-10: calc(var(--vw) * 10);
+  --spacing-vw-12: calc(var(--vw) * 12);
+  --spacing-vw-14: calc(var(--vw) * 14);
+  --spacing-vw-15: clamp(1.25rem, calc(var(--vw) * 20), 2rem);
+  --spacing-vw-16: var(--grid-pad);
+  --spacing-vw-19: calc(var(--vw) * 19);
+  --spacing-vw-20: calc(var(--vw) * 20);
+  --spacing-vw-24: calc(var(--vw) * 24);
+  --spacing-vw-32: calc(var(--vw) * 32);
+  --spacing-vw-34: clamp(28px, calc(var(--vw) * 34), 38px);
+  --spacing-vw-40: calc(var(--vw) * 40);
+  --spacing-vw-48: clamp(1.5rem, calc(var(--vw) * 48), 3rem);
+  --spacing-vw-106: calc(var(--vw) * 106);
+  --spacing-vw-122: clamp(104px, calc(var(--vw) * 122), 140px);
+  --spacing-vw-184: calc(var(--vw) * 180);
+
+  --radius-vw-17: clamp(14px, calc(var(--vw) * 17), 20px);
+
+  /* Ajustes Ópticos Cap-Trim */
+  --cap-trim: calc(var(--vw) * -3);
+  --cap-trim-heading: calc(var(--vw) * -7);
+  --cap-trim-statement: calc(var(--vw) * -5);
+
+  /* Statement Tipográfico */
+  --statement-size: 62;
+  --statement-line: calc(var(--vw) * var(--statement-size) * 0.95);
+
+  /* =========================================
+     CURVAS DE ANIMACIÓN (Relay & Reveal Easing)
+     ========================================= */
+  --relay-ease: cubic-bezier(0.625, 0.05, 0, 1);
+  --relay-t: 0.735s;
+  --relay-wait: 0.5s;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --panel-ease: cubic-bezier(0.8, 0, 0.17, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --vw: calc(100vw / var(--t));
+    --statement-size: 38;
+    --marge-x: 1rem;
+    --gutter: 12px;
+    --grid-pad: 12px;
+    --header-height: 3.25rem;
+  }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --vw: calc(100vw / var(--m));
+    --col-l: 4;
+    --marge-x: 0.75rem;
+    --gutter: 12px;
+    --grid-pad: 12px;
+    --statement-size: 28;
+    --header-height: 3rem;
+  }
+}
+
+/* Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  font-family: var(--font-display);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Superficie clara oficial (.surface-light de j.mr) */
+.surface-light {
+  --color-bg: #f9fafb;
+  --color-ink: #343131;
+  --color-line: #d8d7d7;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+/* Selección de Texto Minimalista */
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+}
+
+::-moz-selection {
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+}
+
+/* =========================================
+   CLASES ESTRUCTURALES DEL GRID SUIZO (JMR)
+   ========================================= */
+.container-jmr {
+  width: 100%;
+  max-width: none;
+  padding-left: var(--marge-x);
+  padding-right: var(--marge-x);
+}
+
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--col-l), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* Celdas de la cuadrícula con respiración simétrica de 12px alrededor de la línea divisoria */
+.rail-cell {
+  padding-block: var(--grid-pad);
+}
+
+.main-cell {
+  padding-block: var(--grid-pad);
+}
+
+@media (min-width: 1024px) {
+  .main-cell {
+    border-left: 1px solid var(--color-line);
+    padding-left: var(--grid-pad);
+  }
+
+  .nav-main-cell {
+    padding-left: var(--grid-pad);
+  }
+}
+
+/* =========================================
+   ESCALAS TIPOGRÁFICAS EXACTAS
+   ========================================= */
+.t-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(18px, calc(var(--vw) * 20), 28px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.t-ui {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(13px, calc(var(--vw) * 16), 20px);
+  line-height: 1.25;
+}
+
+.t-statement {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, calc(var(--vw) * var(--statement-size)), 4.75rem);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+}
+
+/* Utilidades proporcionales vw */
+.py-vw-16 { padding-block: var(--grid-pad); }
+.py-nav { padding-block: var(--grid-pad); }
+.pl-vw-16 { padding-left: var(--grid-pad); }
+.pr-vw-16 { padding-right: var(--grid-pad); }
+.mt-vw-2 { margin-top: var(--spacing-vw-2); }
+.mt-vw-48 { margin-top: var(--spacing-vw-48); }
+.gap-vw-8 { gap: clamp(0.75rem, var(--spacing-vw-8), 1.25rem); }
+.gap-vw-12 { gap: clamp(1rem, var(--spacing-vw-12), 1.75rem); }
+.gap-vw-15 { gap: var(--spacing-vw-15); }
+.w-vw-14 { width: clamp(12px, var(--spacing-vw-14), 18px); }
+.h-vw-14 { height: clamp(12px, var(--spacing-vw-14), 18px); }
+.w-vw-122 { width: var(--spacing-vw-122); }
+.h-vw-34 { height: var(--spacing-vw-34); }
+.rounded-vw-17 { border-radius: var(--radius-vw-17); }
+.w-vw-184 { width: clamp(108px, var(--spacing-vw-184), 210px); }
+.top-vw-16 { top: var(--grid-pad); }
+
+/* =========================================
+   PUNTO 2: ANIMACIÓN LINK RELAY & LINK SWEEP OFICIAL (JMR)
+   ========================================= */
+.link-relay {
+  --relay-t: 0.735s;
+  --relay-ease: cubic-bezier(0.625, 0.05, 0, 1);
+  --relay-wait: 0.5s;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+.link-relay::before,
+.link-relay::after {
+  content: "";
+  pointer-events: none;
+  background: currentColor;
+  height: 1px;
+  position: absolute;
+  inset: auto 0 -1px;
+}
+
+.link-relay::before {
+  transform-origin: 0;
+  transform: scaleX(1) rotate(0.001deg);
+}
+
+.link-relay::after {
+  transform-origin: 100%;
+  transform: scaleX(0) rotate(0.001deg);
+}
+
+.link-relay[data-relay]::before {
+  animation: relay-leave var(--relay-t) var(--relay-ease) both;
+}
+
+.link-relay[data-relay]::after {
+  animation: relay-enter var(--relay-t) var(--relay-ease) var(--relay-wait) both;
+}
+
+@keyframes relay-leave {
+  0% {
+    transform-origin: 100%;
+    transform: scaleX(1) rotate(0.001deg);
+  }
+  100% {
+    transform-origin: 100%;
+    transform: scaleX(0) rotate(0.001deg);
+  }
+}
+
+@keyframes relay-enter {
+  0% {
+    transform-origin: 0;
+    transform: scaleX(0) rotate(0.001deg);
+  }
+  100% {
+    transform-origin: 0;
+    transform: scaleX(1) rotate(0.001deg);
+  }
+}
+
+/* Enlaces con barrido horizontal (.link-sweep / .nav-link-hover) */
+.link-sweep,
+.nav-link-hover {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.3s ease-in-out, color 0.2s ease;
+}
+
+.link-sweep:hover,
+.nav-link-hover:hover {
+  background-position: 0 100%;
+  background-size: 100% 1px;
+}
+
+/* =========================================
+   PUNTO 2: HOME REVEAL BLOCK & EMERGE SHAPES (RevealGate)
+   ========================================= */
+.home-reveal-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.home-reveal-inner {
+  display: block;
+  transform: translateY(115%);
+  animation: homeRevealSlide 1s var(--reveal-ease) forwards;
+  animation-delay: var(--reveal-delay, 0s);
+  will-change: transform;
+}
+
+@keyframes homeRevealSlide {
+  0% {
+    transform: translateY(115%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.emerge-shape {
+  transform: translateY(105%);
+  animation: homeRevealSlide 0.85s var(--reveal-ease) forwards;
+  animation-delay: var(--reveal-delay, 0.12s);
+  will-change: transform;
+}
+
+.reveal-dot {
+  transform: scale(0);
+  animation: revealScaleDot 0.9s var(--reveal-ease) forwards;
+  animation-delay: 0.08s;
+}
+
+/* Pausar las animaciones de entrada de la sección mientras el loader inicial esté activo */
+html[data-loader-active] .home-reveal-inner,
+html[data-loader-active] .emerge-shape,
+html[data-loader-active] .reveal-dot {
+  animation-play-state: paused;
+}
+
+@keyframes revealScaleDot {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =========================================
+   PUNTO 1: HOVER PILL MARQUEE (Gallery & Lab)
+   ========================================= */
+.hover-pill-marquee {
+  animation: 10s linear infinite hover-pill-marquee;
+}
+
+@keyframes hover-pill-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-pill-marquee,
+  .home-reveal-inner,
+  .emerge-shape,
+  .reveal-dot {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================
+   PUNTO 4: LAB PANEL & SCRIM ANIMATIONS (j.mr/lab)
+   ========================================= */
+@keyframes lab-panel-in {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes lab-sheet-in {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes lab-scrim-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.lab-panel {
+  --lab-panel-entry: lab-panel-in;
+}
+
+@media (orientation: portrait) {
+  .lab-panel {
+    --lab-panel-entry: lab-sheet-in;
+  }
+}
+
+/* =========================================
+   TEXTURA DE GRANO ANALÓGICO (Grain Overlay)
+   ========================================= */
+.background-grain {
+  z-index: 50;
+  opacity: 1;
+  mix-blend-mode: hard-light;
+  pointer-events: none;
+  will-change: transform;
+  background-image: url(/bg-grain.png);
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: auto;
+  width: 200%;
+  height: 200vh;
+  animation: 0.5s steps(10, end) infinite grain;
+  position: fixed;
+  inset: -50% 0% 0% -50%;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, 5%); }
+  20% { transform: translate(3%, -10%); }
+  30% { transform: translate(-2%, -15%); }
+  40% { transform: translate(-3%, -9%); }
+  50% { transform: translate(12%, 9%); }
+  60% { transform: translate(9%, -4%); }
+  70% { transform: translate(-1%, 1%); }
+  80% { transform: translate(1%, -7%); }
+  90% { transform: translate(-7%, 1%); }
+}

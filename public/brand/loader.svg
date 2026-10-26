@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128"><style>
+:root{--relay-ease:cubic-bezier(.625,.05,0,1)}
+.trace{stroke-dasharray:132;stroke-dashoffset:132;animation:draw 2.8s var(--relay-ease) infinite}
+.dot{transform-box:fill-box;transform-origin:50% 50%;opacity:0;transform:translateY(6px) scale(.4);animation:dot 2.8s var(--relay-ease) infinite}
+@keyframes draw{0%{stroke-dashoffset:132}38%,66%{stroke-dashoffset:0}100%{stroke-dashoffset:-132}}
+@keyframes dot{0%,36%{opacity:0;transform:translateY(6px) scale(.4)}52%,70%{opacity:1;transform:none}86%,100%{opacity:0;transform:translateY(6px) scale(.4)}}
+@media (prefers-reduced-motion:reduce){.trace{animation:none;stroke-dashoffset:0}.dot{animation:none;opacity:1;transform:none}}
+</style><defs><clipPath id="n"><polygon points="12.5,16 21.5,16 34.5,38.32 34.5,16 41.5,16 41.5,52 32.5,52 19.5,29.68 19.5,52 12.5,52"/></clipPath></defs><rect width="64" height="64" rx="14" fill="#343131"/><g clip-path="url(#n)"><path class="trace" d="M16 56V12L31 54L31 12" transform="translate(0 0)" fill="none" stroke="#f9fafb" stroke-width="14"/></g><circle class="dot" cx="49" cy="47.5" r="4.75" fill="#C4452F"/></svg>
