@@ -25,21 +25,23 @@ const projects = [
     liveUrl: "https://veritask.cloud"
   },
   {
-    slug: "portal-academico",
-    title: "Portal Institucional",
-    client: "Institución Educativa",
-    role: "Frontend & CMS Developer",
-    year: "2025",
+    slug: "cortafuegos-manta",
+    title: "Cortafuegos Manta",
+    client: "SpookyThon 2026 · Track B",
+    role: "Cloud & Full-Stack Developer",
+    year: "2026",
     color: "#C4452F",
-    badge: "PRODUCTION // WEB PORTAL",
-    summary: "Desarrollo y personalización de portal académico en entorno productivo con gestión dinámica de noticias.",
+    badge: "SIMULATION // AWS SERVERLESS",
+    summary: "Simulador epidemiológico SEIR sobre red de contactos con intervenciones optimizadas por ROI y arquitectura serverless en AWS.",
     details: [
-      "Implementación de sistema de diseño personalizado mediante CSS modular en producción.",
-      "Desarrollo de shortcodes a medida y configuración avanzada de bloques dinámicos.",
-      "Optimización de la arquitectura de información para comunicados y noticias institucionales."
+      "Simulador estocástico SEIR sobre red de contactos multicapa (hogares, hubs urbanos y transporte) calibrado con simulaciones Monte Carlo.",
+      "Algoritmo voraz ('Escudo Manta') para asignación óptima de recursos diarios: vacunación en anillo, brigadas de aislamiento y cortafuegos en hubs.",
+      "Arquitectura serverless distribuida en AWS: orquestación con Step Functions Express, workers paralelos en AWS Lambda, caché en DynamoDB y almacenamiento en S3.",
+      "Consola web interactiva en React 19 + TypeScript + Tailwind CSS con mapa animado en Leaflet, métricas en Recharts y reportes con IA (Amazon Bedrock)."
     ],
-    stack: ["WordPress", "Custom CSS", "Elementor", "PHP Shortcodes", "UI Design"],
-    liveUrl: "/lab"
+    stack: ["AWS Step Functions", "AWS Lambda", "Python 3.12", "React 19", "DynamoDB", "Tailwind CSS", "Monte Carlo"],
+    liveUrl: "https://main.d2rdluo4raik0f.amplifyapp.com",
+    githubUrl: "https://github.com/Nandofernando28/jawollin"
   },
   {
     slug: "aws-genai",
@@ -527,7 +529,7 @@ const projects = [
           <div id="drawer-proj-stack" class="flex flex-wrap gap-2"></div>
         </div>
 
-        <div class="pt-4">
+        <div class="pt-4 flex flex-wrap items-center gap-4">
           <a
             id="drawer-proj-link"
             href="#"
@@ -537,6 +539,18 @@ const projects = [
           >
             <span class="w-2.5 h-2.5 rounded-full bg-current inline-block"></span>
             <span id="drawer-proj-link-text" class="link-relay">Visitar landing page ↗</span>
+          </a>
+          <a
+            id="drawer-proj-github"
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            class="t-ui inline-flex items-center gap-2 text-[var(--color-muted)] hover:text-[var(--color-ink)] no-underline hidden"
+          >
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span id="drawer-proj-github-text" class="link-relay">Código en GitHub ↗</span>
           </a>
         </div>
       </div>
@@ -1168,8 +1182,18 @@ const projects = [
         projLink.rel = p.liveUrl.startsWith('http') ? 'noreferrer' : '';
         if (projLinkText) {
           projLinkText.textContent = p.liveUrl.startsWith('http')
-            ? `Visitar landing page oficial (${p.client}) ↗`
+            ? (p.slug === 'cortafuegos-manta' ? 'Visitar aplicación en vivo en AWS ↗' : `Visitar aplicación en vivo (${p.client}) ↗`)
             : (p.liveUrl === '/lab' ? 'Explorar Certificados ↗' : 'Ver más detalles ↗');
+        }
+      }
+
+      const projGithub = document.getElementById('drawer-proj-github');
+      if (projGithub) {
+        if (p.githubUrl) {
+          projGithub.href = p.githubUrl;
+          projGithub.classList.remove('hidden');
+        } else {
+          projGithub.classList.add('hidden');
         }
       }
 
